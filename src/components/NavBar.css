@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
+
+nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 8vh;
+    min-width: 75vw;
+    font-family: 'Raleway', sans-serif;
+    color: #000;
+}
+
+/* .logo {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+} */
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    transition: width 1s;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a:hover {
+    color: rgb(233, 217, 0);
+}
+
+.nav-links a {
+    color: #000;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.burger {
+    color: #000;
+    margin: 5px;
+    display: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.logo {
+    color: rgb(233, 217, 0);
+    font-size: 1.5rem;
+    font-family: 'Lobster Two', cursive;
+}
+
+.burger:hover {
+    color: rgb(233, 217, 0);
+}
+
+@media screen and (max-width:1024px) {
+    .nav-links {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .nav-links {
+        position: absolute;
+        justify-content: flex-start;
+        flex-direction: column;
+        left: 0px;
+        bottom: 8vh;
+        height: 20vh;        
+        overflow: hidden;
+        transform: translateY(100%);
+        transition: transform 0.5s ease-in-out, visibility 0.5s ease-out;
+        visibility: hidden;
+        padding-left: 1rem;
+        padding-top: 1rem;        
+        z-index: 2;
+    }
+    
+    .nav-links li {
+        height: 25%;
+        opacity: 0;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+.nav-links.active {
+    transform: translateY(0%);
+    visibility: visible;    
+}
+
+.out-nav-links {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.out-nav-links.active {
+    display: block;
+}
+
+@keyframes navLinkFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes navLinkFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes navLinkFadeBackgroundIn {
+    from {
+        background-color: transparent;
+    }
+    to {
+        background-color: rgb(39, 39, 39, 0.9);
+    }
+}
+
+@keyframes navLinkFadeBackgroundOut {
+    from {
+        background-color: rgb(39, 39, 39, 0.9);
+    }
+    to {
+        background-color: transparent;
+    }
+}

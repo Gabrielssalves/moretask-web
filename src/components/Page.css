@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    max-height: 15%;
+    min-height: 5%;
+    opacity: 0;
+    animation: fade 0.5s ease forwards 0.2s;
+    font-family: 'Playfair Display', serif;    
+    color: #000;
+}
+
+.page-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-weight: 400;
+    max-height: 85%;
+    opacity: 0;
+    animation: fade 0.5s ease forwards 0.5s;
+    overflow: auto;
+}
+
+.page-body::-webkit-scrollbar {
+    background-color: rgba(233, 217, 0, 0.575);
+    border-radius: 20px;
+    width: 5px;
+}
+
+.page-body::-webkit-scrollbar-thumb {
+    background-color: rgb(51, 51, 51);
+    border-radius: 25px;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

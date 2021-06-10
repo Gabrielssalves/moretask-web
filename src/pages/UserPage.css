@@ -1,0 +1,75 @@
+.userPage {     
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    background: #35394a; /* Old browsers */
+    background: -moz-linear-gradient(45deg,  #35394a 0%, #1f222e 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#35394a), color-stop(100%,#1f222e)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* IE10+ */
+    background: linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* W3C */
+    max-width: 720px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    color: #fff
+}
+
+.userPage input {
+    font-family: 'Gudea', sans-serif;
+    outline: 0;
+    background: rgb(50, 54, 74);
+    width: 90%;
+    border-top: 2px solid rgb(57, 61, 82);
+    border-bottom: 2px solid rgb(57, 61, 82);
+    border-right: none;
+    border-left: none;
+    color: #afb1be;
+    margin: 25px 0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.user, .password, .confirmPassword, .email, .name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+.userPage button {    
+    border-radius:50px;
+    background:transparent;
+    padding:10px 50px;
+    border:2px solid #DC6180 ;
+    color: #DC6180 ;
+    text-transform:uppercase;
+    font-size:11px;
+    transition-property:background,color;
+    transition-duration:.2s;
+}
+
+.userPage button:hover {
+    color:white;
+    background:#DC6180 ;
+    cursor:pointer;
+    transition-property:background,color;
+    transition-duration:.2s;
+}
+
+.userPage h1 {
+    padding: 20px;
+}
+
+.userPage label {
+    margin-left: -200px;
+    text-align: start;
+    width: 50%;
+}
