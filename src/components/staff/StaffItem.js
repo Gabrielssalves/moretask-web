@@ -5,7 +5,7 @@ const StaffItem = ({ staff }) => {
     return (
         <li className="collection-item">
             <div>
-                {staff.name}
+                {staff.Nm_User}
             </div>
         </li>
     )

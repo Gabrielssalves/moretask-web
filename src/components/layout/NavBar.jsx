@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom'
 import './NavBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { NavLinksData } from '../data/NavLinks.js'
+import { NavLinksData } from '../../data/NavLinks.js'
 
 const NavBar = (props) => {
     const [navActive, setNavActive] = useState(false); 
     const [selectedPage, setSelectedPage] = useState('/' + (window.location.pathname.split('/')[2] ? window.location.pathname.split('/')[2] : ""));
     console.log(selectedPage)
     return (
-        <React.Fragment>
+        <div className="custom-nav">
             <nav>
                 <ul className={navActive ? 'nav-links active' : 'nav-links'}
                     onClick={(e) => setSelectedPage('/' + e.target.pathname.split('/')[2])}
@@ -35,7 +35,7 @@ const NavBar = (props) => {
             </nav>
             <div className={navActive ? 'out-nav-links active' : 'out-nav-links'}
                 onClick={ ()=> {setNavActive(false)}}></div>            
-        </React.Fragment>
+        </div>
     )
 }
 

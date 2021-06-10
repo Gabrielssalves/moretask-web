@@ -19,7 +19,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     font-weight: 400;
-    max-height: 85%;
+    max-height: 90%;
     opacity: 0;
     animation: fade 0.5s ease forwards 0.5s;
     overflow: auto;

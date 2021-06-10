@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
 
-nav {
+.custom-nav nav {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -19,22 +19,22 @@ nav {
     font-size: 20px;
 } */
 
-.nav-links {
+.custom-nav  .nav-links {
     display: flex;
     justify-content: space-around;
     width: 50%;
     transition: width 1s;
 }
 
-.nav-links li {
+.custom-nav  .nav-links li {
     list-style: none;
 }
 
-.nav-links a:hover {
+.custom-nav  .nav-links a:hover {
     color: rgb(233, 217, 0);
 }
 
-.nav-links a {
+.custom-nav  .nav-links a {
     color: #000;
     text-decoration: none;
     letter-spacing: 3px;
@@ -42,7 +42,7 @@ nav {
     font-size: 14px;
 }
 
-.burger {
+.custom-nav  .burger {
     color: #000;
     margin: 5px;
     display: none;
@@ -50,24 +50,24 @@ nav {
     z-index: 2;
 }
 
-.logo {
+.custom-nav  .logo {
     color: rgb(233, 217, 0);
     font-size: 1.5rem;
     font-family: 'Lobster Two', cursive;
 }
 
-.burger:hover {
+.custom-nav  .burger:hover {
     color: rgb(233, 217, 0);
 }
 
 @media screen and (max-width:1024px) {
-    .nav-links {
+    .custom-nav  .nav-links {
         width: 70%;
     }
 }
 
 @media screen and (max-width:768px) {
-    .nav-links {
+    .custom-nav  .nav-links {
         position: absolute;
         justify-content: flex-start;
         flex-direction: column;
@@ -83,22 +83,22 @@ nav {
         z-index: 2;
     }
     
-    .nav-links li {
+    .custom-nav  .nav-links li {
         height: 25%;
         opacity: 0;
     }
 
-    .burger {
+    .custom-nav  .burger {
         display: block;
     }
 }
 
-.nav-links.active {
+.custom-nav  .nav-links.active {
     transform: translateY(0%);
     visibility: visible;    
 }
 
-.out-nav-links {
+.custom-nav  .out-nav-links {
     display: none;
     width: 100vw;
     height: 100vh;
@@ -108,7 +108,7 @@ nav {
     z-index: 1;
 }
 
-.out-nav-links.active {
+.custom-nav  .out-nav-links.active {
     display: block;
 }
 

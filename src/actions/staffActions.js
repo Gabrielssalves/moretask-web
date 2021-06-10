@@ -9,12 +9,14 @@ export const getStaff = () => async dispatch => {
   try {
     setLoading();
 
-    const res = await fetch("/users");
+    const res = await fetch('https://moretask-fatec.herokuapp.com/user/', {
+      method: 'GET'
+  });
     const data = await res.json();
 
     dispatch({
       type: GET_STAFF,
-      payload: data
+      payload: data.Users
     });
   } catch (err) {
     dispatch({

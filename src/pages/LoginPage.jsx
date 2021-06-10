@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Page from '../components/Page'
 import './LoginPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faKey } from '@fortawesome/free-solid-svg-icons'
 import fetch from 'node-fetch'
-import querystring from 'querystring'
+// import querystring from 'querystring'
 
 class LoginPage extends React.Component {
     constructor(props) {

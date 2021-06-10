@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Page from '../components/Page'
 import './UserPage.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserAlt, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faUserAlt, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import fetch from 'node-fetch'
-import { faKeybase } from '@fortawesome/free-brands-svg-icons'
+// import { faKeybase } from '@fortawesome/free-brands-svg-icons'
 
 class UserPage extends React.Component {
     constructor(props) {

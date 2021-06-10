@@ -1,33 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
 
+html {
+    overflow: hidden;
+}
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #EA5C54 ; /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  #EA5C54  0%, #bb6dec 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#EA5C54 ), color-stop(100%,#bb6dec)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* IE10+ */
+    background: linear-gradient(135deg,  #EA5C54  0%,#bb6dec 100%); /* W3C */
+  }
+  
+  .page {
+    width: 90vw;
+    height: 100vh;
+    color: #000;
+    font-family: 'Raleway', sans-serif;
+  }
 
-.app {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #EA5C54 ; /* Old browsers */
-  background: -moz-linear-gradient(-45deg,  #EA5C54  0%, #bb6dec 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#EA5C54 ), color-stop(100%,#bb6dec)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* IE10+ */
-  background: linear-gradient(135deg,  #EA5C54  0%,#bb6dec 100%); /* W3C */
-}
-
-.page {
-  width: 90vw;
-  height: 100vh;
-  color: #000;
-  font-family: 'Raleway', sans-serif;
-}
 
 li {
     list-style-type: none;
@@ -44,13 +48,122 @@ li {
     margin-left: 1%;
 }
 
+/* search bar size*/
+.input-customsize {
+    width: 30%;
+}
+
+/* workflow card layout */
+
+#kaban {
+    float:left;
+    position:relative;
+    margin-left: 12%;
+    margin-top: 1%;
+    width:100%;
+    height:auto;
+}
+
+#scroller {
+    float:left;
+    position:relative;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    overflow:auto;
+}
+
+#boards {
+    float:left;
+    position:relative;
+    width:auto;
+    height:auto;
+    margin-bottom:30px;
+}
+
+.board {
+    float:left;
+    position:relative;
+    width:300px;
+    height:auto;
+    margin:8px;
+    background-color:lightgray;
+    border-radius:3px;
+    box-shadow:1px 1px 1px rgba(0,0,0,.2);
+}
+
+.board header {
+    float:left;
+    width:100%;
+    padding:.5em;
+    background-color:lightgray;
+    text-transform:uppercase;
+    border-radius:3px 3px 0 0;
+}
+
+#board1 header {
+    background-color:#BC3425;
+    color:white;
+    font-weight: 600;
+}
+
+#board2 header {
+    background-color:#e6cb22;
+    color:white;
+    font-weight: 600;
+}
+
+#board3 header {
+    background-color:#11b82a;
+    color:white;
+    font-weight: 600;
+}
+
+.cards {
+    list-style-type:none;
+    float:left;
+    width:100%;
+    padding:4px 8px;
+}
+
+.card {
+    float:left;
+    width:100%;
+    height:auto;
+    background-color:white;
+    padding:10px;
+    margin:4px 0;
+    border-radius:3px;
+    box-shadow:1px 1px 1px rgba(0,0,0,.2);
+}
+
+.cardtitle {
+    float:left;
+    width:100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cards .is-moving {
+    background-color:white;
+    color:black
+}
+
+
 .collection {
+    background-color: #fff;
     margin: 0.5rem 0 1rem 0;
     border: 1px solid #e0e0e0;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
 }
+
+.collection.with-header .collection-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+  }
 
 .collection .collection-item {
     background-color: #fff;
@@ -118,4 +231,12 @@ li {
     font-family: 'Courier New', monospace;
     text-align: justify;
     font-size: 0.8rem;
+}
+
+.comment-textarea {
+    width: 99%;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
 }
