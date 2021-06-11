@@ -32,7 +32,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                         <div id="scroller">
                             <div id="boards">
                                 <div className="board" id="board1">
-                                    <header>On hold</header>
+                                    <header className="text-center">On hold</header>
                                     <div className="cards" id="b1">
                                         {!loading && tasks.length === 0 ? (
                                             <p className="center">No task to show...</p>
@@ -44,7 +44,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                 </div>
 
                                 <div className="board" id="board2">
-                                    <header>In Progress</header>
+                                    <header className="text-center">In Progress</header>
                                     <div className="cards" id="b2">
                                         {!loading ? (
                                             <p className="center">No task to show...</p>
@@ -55,7 +55,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                 </div>
 
                                 <div className="board" id="board3">
-                                    <header>Completed</header>
+                                    <header className="text-center">Completed</header>
                                     <div className="cards" id="b3">
                                         {!loading ? (
                                             <p className="center">No task to show...</p>

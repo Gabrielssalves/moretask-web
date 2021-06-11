@@ -11,7 +11,7 @@ const StaffSelectOptions = ({ getStaff, staff: { staff, loading } }) => {
 
 
     return (
-        !loading && staff !== null && staff.map(staff => <option key={staff.id} value={`${staff.name}`}>
+        !loading && staff !== null && staff.map(staff => <option key={staff._id} value={`${staff.name}`}>
             {staff.name}
         </option>)
     )

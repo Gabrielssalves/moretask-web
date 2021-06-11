@@ -60,10 +60,10 @@ li {
     float:left;
     position:relative;
     margin-top: 1%;
-    width: 90%;
-    border-radius: 20px;
+    width: 90%;    
     height:auto;
     padding: 20px;
+    border-radius: 20px;
     background-color: rgba(0,0,0, 0.3) !important;
 }
 
@@ -138,11 +138,13 @@ li {
     margin:4px 0;
     border-radius:3px;
     box-shadow:1px 1px 1px rgba(0,0,0,.2);
+    font-weight: 600;
 }
 
 .cardtitle {
     float:left;
     width:100%;
+    font-weight: 600;
     padding-bottom: 8px;
     border-bottom: 1px solid #e0e0e0;
 }
@@ -150,6 +152,10 @@ li {
 .cards .is-moving {
     background-color:white;
     color:black
+}
+
+.card-content-text{
+    font-size: 0.8rem;
 }
 
 
@@ -242,4 +248,9 @@ li {
 
 .h-85 {
     height: 85%;
+}
+
+.glass-background {
+    border-radius: 20px;
+    background-color: rgba(0,0,0, 0.3) !important;
 }

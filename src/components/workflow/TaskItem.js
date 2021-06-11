@@ -37,18 +37,14 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
             >
                 {task.Nm_Task}
             </a>
-            <p className="text-black h6">
-                {task.Ob_Owner}
-            </p>
-            <span className="text-secondary">
-                <span className="text-dark">
-                    Id #{task._id}
-                </span>
-                {' '}created by [
-                    <span className="text-dark">
-                    {task.Ob_Owner}]
-                    </span>
-                {' '}on{' '} [<Moment format="MMMM Do YYYY, h:mm A">{task.Dt_Create}</Moment>]
+            <span className="text-black">
+                <span className="card-content-text ">Assigned to{' '}</span>
+                <strong>Gabriel</strong>
+            </span>
+            <span className="text-secondary card-content-text ">
+                Created on{' '}
+            <br />
+            <Moment format="MMMM Do YYYY, h:mm">{task.Dt_Create}</Moment>
             </span>
             <div className="d-flex justify-content-end">
                 <a
@@ -69,4 +65,4 @@ TaskItem.propTypes = {
     setCurrent: PropTypes.func.isRequired
 }
 
-export default connect(null, {deleteTask, setCurrent })(TaskItem)
+export default connect(null, { deleteTask, setCurrent })(TaskItem)
