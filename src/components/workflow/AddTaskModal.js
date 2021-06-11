@@ -16,7 +16,6 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
     const [dtPrediction, setDt_Prediction] = useState(new Date());
     const idWorkflow = "60c2ce63e514c20004ce378f";
     const status = "Backlog"
-    
 
     const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
 
@@ -46,8 +45,6 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
                 dtPrediction
             }
             addTask(newTask);
-
-            console.log(dtStart)
             
             //clear fields
             setNm_Task("");

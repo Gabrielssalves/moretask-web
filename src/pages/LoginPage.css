@@ -13,7 +13,7 @@
     background: -ms-linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* IE10+ */
     background: linear-gradient(45deg,  #35394a 0%,#1f222e 100%); /* W3C */
     max-width: 360px;
-    margin: 0 auto 100px;
+    margin: 0 auto;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -46,7 +46,6 @@
 
 .stay-loged {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
     width: 100%;

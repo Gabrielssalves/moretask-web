@@ -23,9 +23,8 @@ class LoginPage extends React.Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
         this.setState({
-          [name]: value
+            [name]: value
         });
     }
 
@@ -35,7 +34,7 @@ class LoginPage extends React.Component {
             password: this.state.password
         }
 
-        const result =  await fetch('https://moretask-fatec.herokuapp.com/user/login', {
+        const result = await fetch('https://moretask-fatec.herokuapp.com/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,50 +44,57 @@ class LoginPage extends React.Component {
 
         const data = await result.json();
         if (result.status === 200) {
-            localStorage.setItem('userToken', data.token);            
+            localStorage.setItem('userToken', data.token);
+            localStorage.setItem('userAdmin', data.admin);
+            localStorage.setItem("userName", data.name);
             this.props.history.push('/task')
         }
-        else            
-            console.log(data.message);    
-        
-    }
-    
+        else
+            console.log(data.message);
 
-    render() {    
+    }
+
+
+    render() {
         return (
-            <Page 
-            body={
-            <div className="login">
-                <h1>Login</h1>
-                <div className="user">
-                    <FontAwesomeIcon icon={faUserAlt}/>
-                    <input 
-                        type="text"
-                        name="user"
-                        value={this.state.user}
-                        onChange={this.handleInputChange}/>
-                </div>
-                <div className="password">
-                    <FontAwesomeIcon icon={faKey}/>
-                    <input 
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}/>
-                </div>
-                <div className="stay-loged">
-                    <input 
-                        type="checkbox"
-                        name="remember"
-                        checked={this.state.remember}
-                        onChange={this.handleInputChange}/>
-                    <p>Mantenha-se logado</p>
-                </div>
-                <button onClick={this.postUserLogin}>Logar</button>
-                <div className="register-btn">
-                    <a href="/register">Registrar-se</a>
-                </div>
-            </div>}>
+            <Page
+                body={
+                    <div className="login">
+                        <h1>Login</h1>
+                        <div className="user">
+                            <FontAwesomeIcon icon={faUserAlt} />
+                            <input
+                                type="text"
+                                name="user"
+                                value={this.state.user}
+                                onChange={this.handleInputChange} />
+                        </div>
+                        <div className="password">
+                            <FontAwesomeIcon icon={faKey} />
+                            <input
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleInputChange} />
+                        </div>
+                        <div className="stay-loged justify-content-center mb-4">
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                className="m-0"
+                                checked={this.state.remember}
+                                onChange={this.handleInputChange} />
+                            <p className="m-0">Mantenha-se logado</p>
+                        </div>
+                        <div>
+                            <div>
+                                <button onClick={this.postUserLogin}>Logar</button>
+                            </div>
+                            <div className="register-btn mt-4">
+                                <a href="/register">Registrar-se</a>
+                            </div>
+                        </div>
+                    </div>}>
             </Page>
         )
     }

@@ -1,17 +1,18 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import SearchBar from "./Searchbar";
 
 const Navbar = (props) => {
-    const path = props.location.pathname;
+    const userName = localStorage.getItem("userName");
 
     return (
         <div className="row w-95">
             <nav className="navbar">
                 <div className="container-fluid justify-content-end">
-                    {(path === "/workflow" ) && <SearchBar />}
+                    <div>
+                        {(userName !== "" && <span className="text-light me-5 h5">Welcome, {userName}!</span>)}
+                    </div>
                     <div className="logo">
-                        <span>MoreTask</span>
+                        <a href="/login">MoreTask</a>
                     </div>
                 </div>
             </nav>

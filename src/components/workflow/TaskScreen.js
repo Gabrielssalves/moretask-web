@@ -2,27 +2,27 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { getTasks, updateTask } from "../../actions/taskActions";
+import { getMainTask, updateTask } from "../../actions/taskActions";
 // import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "../layout/Spinner";
 import Page from '../Page';
 
-const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
-    const [ds_status, setDs_Status] = useState("");
+const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
+    const [status, setDs_Status] = useState("");
 
-    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {ds_status}</span>, { toastId: "custom-id-success" })
+    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {status}</span>, { toastId: "custom-id-success" })
 
     useEffect(() => {
-        getTasks();
+        getMainTask();
         // eslint-disable-next-line
     }, []);
 
     const onSubmit = () => {
         const updTask = {
             id: tasks[0]._id,
-            ds_status
+            status,
         }
         updateTask(updTask);
         taskUpdatedStatusToast();
@@ -82,14 +82,15 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                             <span className="h6 ms-1 text-secondary">Task Status</span>
                                             <select
                                                 className="form-select mt-1"
-                                                name="ds_status"
-                                                value={tasks[0].Ob_Status.Ds_status}
+                                                name="status"
+                                                value={tasks[0].Ds_Status_Task}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
                                                 <option defaultValue value="" disabled>Set Assignee</option>
-                                                <option value="On Hold">On Hold</option>
-                                                <option value="In Progress">In Progress</option>
-                                                <option value="Completed">Completed</option>
+                                                <option value="Backlog">Backlog</option>
+                                                <option value="Aberto">Aberto</option>
+                                                <option value="Andamento">Andamento</option>
+                                                <option value="Concluido">Concluido</option>
                                             </select>
                                             <button
                                                 type="button"
@@ -99,28 +100,6 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                                 Update Status
                                             </button>
                                             <br />
-                                        </li>
-                                        <li className="collection-item">
-                                            <span className="h6 ms-1 text-secondary">Comments</span>
-                                        </li>
-
-                                        {/* {!loading && tasks[0].Ls_Comments.length === 0 ? (
-                                            <p className="center mt-3">No comments to show...</p>
-                                        ) : (
-                                            tasks[0].Ls_Comments.map(Ls_Comments => <CommentItem Ls_Comments={Ls_Comments} key={Ls_Comments.comment_id} />)
-                                        )} */}
-
-                                        <li className="collection-item">
-                                            <div className="mx-1 mt-2 ">
-                                                <textarea
-                                                    className="form-control"
-                                                    placeholder="Add new comment..."
-                                                    type="text"
-                                                    name="taskDescription"
-                                                    rows="5"
-                                                />
-                                            </div>
-                                            <button type="button" className="btn btn-primary float-end me-2 my-2">Send</button>
                                         </li>
                                     </div>
 
@@ -135,7 +114,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
 }
 
 TaskScreen.propTypes = {
-    getTasks: PropTypes.func.isRequired,
+    getMainTask: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired
 }
 
@@ -145,5 +124,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getTasks, updateTask }
+    { getMainTask, updateTask }
 )(TaskScreen)

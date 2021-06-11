@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { updateTask } from "../../actions/taskActions"
+import { updateTask } from "../../actions/taskActions";
 import { getStaff } from "../../actions/staffActions";
-import StaffSelectOptions from "../staff/StaffSelectOptions"
+import StaffSelectOptions from "../staff/StaffSelectOptions";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,23 +18,25 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     const [status, setDs_Status] = useState("");
 
     const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
-    const taskUpdatedToast = () => toast("Task Updated Successfully!", {autoClose : 2000, toastId: "custom-id-success"});
+    const taskUpdatedToast = () => toast("Task Updated Successfully!", { autoClose: 2000, toastId: "custom-id-success" });
 
     useEffect(() => {
-        getStaff();        
+        getStaff();
         if (current) {
             setNm_Task(current.Nm_Task);
             setDs_Task(current.Ds_Task);
             setUserName(current.Ob_User.Nm_User);
-            setDt_Start(current.Dt_Start);
-            setDt_Prediction(current.Dt_Prediction);
-            setDs_Status(current.Ob_Status.Ds_Status);
+            setDt_Start((current.Dt_Start).substring(0, 16));
+            setDt_Prediction((current.Dt_Prediction).substring(0, 16));
+            setDs_Status(current.Ds_Status_Task);
         }
         // eslint-disable-next-line
     }, [current]);
 
     const browseUsers = (userName) => {
         staff.filter(staff => staff.Nm_User === userName).map(filteredStaff => (setUser(filteredStaff._id)));
+        console.log(userName);
+        console.log(user);
     }
 
     const onSubmit = () => {
@@ -44,11 +46,14 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
             const updTask = {
                 _id: current._id,
                 name,
+                user,
                 description,
                 status,
                 dtStart,
-                dtPrediction                
+                dtPrediction
             }
+            console.log(userName)
+            console.log(user)
             updateTask(updTask);
             taskUpdatedToast();
         }
@@ -95,7 +100,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                 className="form-select"
                                 name="userName"
                                 value={userName}
-                                onChange={e => {setUserName(e.target.key); browseUsers(e.target.value)}  }
+                                onChange={e => { setUserName(e.target.key); browseUsers(e.target.value) }}
                             >
                                 <option value="" disabled>Set Assignee</option>
                                 <StaffSelectOptions />
@@ -120,7 +125,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                     type="datetime-local"
                                     id="dtPrediction"
                                     value={dtPrediction}
-                                    onChange={e => setDt_Prediction((e.target.value).substr(0, 16))}
+                                    onChange={e => setDt_Prediction(e.target.value)}
                                 />
                             </div>
                         </div>

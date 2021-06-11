@@ -7,6 +7,5 @@ export const UPDATE_TASK = 'UPDATE_TASK';
 export const CLEAR_TASKS = 'CLEAR_TASKS';
 export const SET_LOADING = 'SET_LOADING';
 export const TASKS_ERROR = 'TASKS_ERROR';
-export const SEARCH_TASKS = 'SEARCH_TASKS';
 export const GET_STAFF = 'GET_STAFF';
 export const STAFF_ERROR = 'STAFF_ERROR';

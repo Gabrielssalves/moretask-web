@@ -5,7 +5,6 @@ import {
     ADD_TASK,
     DELETE_TASK,
     UPDATE_TASK,
-    SEARCH_TASKS,
     SET_CURRENT,
     CLEAR_CURRENT
 } from "../actions/types";
@@ -34,19 +33,14 @@ const taskReducer = (state = initialState, action) => {
         case DELETE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.filter(task => task.id !== action.payload),
+                tasks: state.tasks.filter(task => task._id !== action.payload),
                 loading: false
             };
         case UPDATE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.map(task => task.id === action.payload.id ? action.payload : task)
+                tasks: state.tasks.map(task => task._id === action.payload._id ? action.payload : task)
             };
-        case SEARCH_TASKS:
-            return {
-                ...state,
-                tasks: action.payload
-            }
         case SET_CURRENT:
             return {
                 ...state,

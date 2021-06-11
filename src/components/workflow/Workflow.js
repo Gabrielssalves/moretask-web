@@ -10,6 +10,8 @@ import StaffListModal from "../staff/StaffListModal";
 import Spinner from "../layout/Spinner";
 import Page from '../Page';
 
+
+
 const Workflow = ({ task: { tasks, loading }, getTasks }) => {
 
     useEffect(() => {
@@ -17,11 +19,8 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
         // eslint-disable-next-line
     }, []);
 
-
-    // tasks.filter(task => task.ds_status === "On Hold").map(task => <TaskItem task={task} key={task.id} />)
-
     if (loading || tasks === null) {
-        return (<Spinner />)
+        return <Spinner />
     }
 
     return (
@@ -87,6 +86,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
         </Page >
     )
 }
+
 
 Workflow.propTypes = {
     task: PropTypes.object.isRequired,

@@ -5,7 +5,6 @@ import {
     ADD_TASK,
     DELETE_TASK,
     UPDATE_TASK,
-    SEARCH_TASKS,
     SET_CURRENT,
     CLEAR_CURRENT
 } from "./types";
@@ -39,7 +38,33 @@ export const getTasks = () => async dispatch => {
 
         dispatch({
             type: GET_TASKS,
-            payload: data.workflows[1].Ls_Tasks
+            payload: data.workflows[0].Ls_Tasks
+        });
+    } catch (err) {
+        dispatch({
+            type: TASKS_ERROR,
+            // payload: err.response.statusText
+        })
+    }
+};
+
+// get tasks from server
+export const getMainTask = () => async dispatch => {
+    try {
+        setLoading();
+
+        const token = localStorage.getItem('userToken');
+
+        const res = await fetch('https://moretask-fatec.herokuapp.com/workflow', {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const data = await res.json();
+        data.workflows[0].Ls_Tasks.map(task => console.log(task))
+        console.log(data)
+        dispatch({
+            type: GET_TASKS,
+            payload: data.workflows[0].Ls_Tasks
         });
     } catch (err) {
         dispatch({
@@ -120,26 +145,7 @@ export const updateTask = task => async dispatch => {
             type: UPDATE_TASK,
             payload: data
         });
-    } catch (err) {
-        dispatch({
-            type: TASKS_ERROR,
-            // payload: err.response.statusText
-        })
-    }
-};
-
-// search tasks from server
-export const searchTasks = (text) => async dispatch => {
-    try {
-        setLoading();
-
-        const res = await fetch(`/workflow?q=${text}`);
-        const data = await res.json();
-
-        dispatch({
-            type: SEARCH_TASKS,
-            payload: data
-        });
+        window.location.reload();
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
