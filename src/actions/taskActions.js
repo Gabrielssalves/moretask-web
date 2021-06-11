@@ -52,7 +52,7 @@ export const getTasks = () => async dispatch => {
 export const getMainTask = () => async dispatch => {
     try {
         setLoading();
-
+        const userName = localStorage.getItem("userName");
         const token = localStorage.getItem('userToken');
 
         const res = await fetch('https://moretask-fatec.herokuapp.com/workflow', {
@@ -60,11 +60,11 @@ export const getMainTask = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        data.workflows[0].Ls_Tasks.map(task => console.log(task))
-        console.log(data)
+        const newTask = data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0]
+        console.log(newTask)
         dispatch({
             type: GET_TASKS,
-            payload: data.workflows[0].Ls_Tasks
+            payload: newTask
         });
     } catch (err) {
         dispatch({

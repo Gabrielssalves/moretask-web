@@ -21,7 +21,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
 
     const onSubmit = () => {
         const updTask = {
-            id: tasks[0]._id,
+            _id: tasks._id,
             status,
         }
         updateTask(updTask);
@@ -39,51 +39,51 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
                 body={
                     <Fragment>
                         <ToastContainer />
-                        <ul className="collection with-header w-75 p-0 mt-4 me-5 border border-secondary glass-background">
+                        <ul className="collection with-header w-75 p-0 mt-4 me-5 border border-secondary glass-background ">
                             <li className="collection-header">
                                 <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
-                                <span className="h6 mt-2 text-secondary"> Current Task</span>
+                                <span className="h6 mt-2 text-secondary fw-bolder"> Current Task</span>
                             </li>
                             {!loading && tasks.length === 0 ? (
-                                <p className="center">
+                                <p className="center fw-bolder">
                                     No task to show...
                                 </p>
                             ) : (
                                 <Fragment>
                                     <div>
-                                        <li className="collection-item center">
-                                            <h5>{tasks[0].Nm_Task}</h5>
+                                        <li className="collection-item center text-primary fw-bolder">
+                                            <h5 className="fw-bolder">{tasks.Nm_Task}</h5>
                                         </li>
 
                                         <li className="collection-item">
-                                            <span className="h6 ms-1 text-secondary">Task Description</span>
+                                            <span className="h6 ms-1 text-secondary fw-bolder">Task Description</span>
                                             <br />
                                             <div className="comment-textarea ms-1 mt-1 text-secondary">
-                                                {tasks[0].Ds_Task}
+                                                {tasks.Ds_Task}
                                             </div>
                                         </li>
 
-                                        <li className="collection-item ms-2 ">
-                                            <span className="text-secondary">
+                                        <li className="collection-item ">
+                                            <span className="text-secondary fw-bolder">
                                                 <span className="text-dark">Created by: </span>
                                                 Gabriel
                                                 <br />
                                                 <span className="text-dark">Created on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Create}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Create}</Moment>
                                                 <br />
                                                 <span className="text-dark">Activity Started on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Start}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Start}</Moment>
                                                 <br />
                                                 <span className="text-dark">Forecast Date: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Prediction}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Prediction}</Moment>
                                             </span>
                                         </li>
                                         <li className="collection-item pb-4">
-                                            <span className="h6 ms-1 text-secondary">Task Status</span>
+                                            <span className="h6 ms-1 text-secondary fw-bolder">Task Status</span>
                                             <select
                                                 className="form-select mt-1"
                                                 name="status"
-                                                value={tasks[0].Ds_Status_Task}
+                                                value={tasks.Ds_Status_Task}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
                                                 <option defaultValue value="" disabled>Set Assignee</option>
@@ -94,7 +94,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
                                             </select>
                                             <button
                                                 type="button"
-                                                className="btn btn-primary float-end me-1 my-2"
+                                                className="btn btn-primary float-end me-1 my-2 fw-bolder"
                                                 onClick={onSubmit}
                                             >
                                                 Update Status

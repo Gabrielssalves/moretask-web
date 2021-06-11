@@ -8,9 +8,9 @@ const Navbar = (props) => {
         <div className="row w-95">
             <nav className="navbar">
                 <div className="container-fluid justify-content-end">
-                    <div>
+                    <i>
                         {(userName !== "" && <span className="text-light me-5 h5">Welcome, {userName}!</span>)}
-                    </div>
+                    </i>
                     <div className="logo">
                         <a href="/login">MoreTask</a>
                     </div>

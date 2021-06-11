@@ -14,7 +14,7 @@ import Page from '../Page';
 
 const Workflow = ({ task: { tasks, loading }, getTasks }) => {
 
-    useEffect(() => {
+    useEffect(() => {        
         getTasks();
         // eslint-disable-next-line
     }, []);
