@@ -26,7 +26,7 @@ const StaffListModal = ({ getStaff, staff: { staff, loading } }) => {
                             <ul className="collection p-0">
                                 {!loading &&
                                     staff.map(staff => (
-                                        <StaffItem staff={staff} key={staff.id} />
+                                        <StaffItem staff={staff} key={staff._id} />
                                     ))}
                             </ul>
                         </div>

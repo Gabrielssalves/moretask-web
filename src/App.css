@@ -38,7 +38,8 @@ li {
 }
 
 .sidenav---sidenav---_2tBP {
-    background-color: #0000ff !important;
+    background-color: rgba(0,0,0, 0.25) !important;
+    backdrop-filter: blur(45px);
     position: fixed !important;
 }
 
@@ -58,10 +59,12 @@ li {
 #kaban {
     float:left;
     position:relative;
-    margin-left: 12%;
     margin-top: 1%;
-    width:100%;
+    width: 90%;
+    border-radius: 20px;
     height:auto;
+    padding: 20px;
+    background-color: rgba(0,0,0, 0.3) !important;
 }
 
 #scroller {
@@ -84,7 +87,7 @@ li {
 .board {
     float:left;
     position:relative;
-    width:300px;
+    width:200px;
     height:auto;
     margin:8px;
     background-color:lightgray;
@@ -223,10 +226,6 @@ li {
     width: 60px;
 }
 
-.btn-primary{
-    background-color: #0000ff;
-}
-
 .code-text{
     font-family: 'Courier New', monospace;
     text-align: justify;
@@ -239,4 +238,8 @@ li {
     border-radius: 3px;
     padding: 8px 12px;
     font-size: 0.9rem;
+}
+
+.h-85 {
+    height: 85%;
 }

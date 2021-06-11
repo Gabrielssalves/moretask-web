@@ -3,7 +3,7 @@ import React from 'react'
 const AddBtn = () => {
     return (
         <div className="btn-group dropup btn-modal-workflow position-fixed">
-            <button type="button" className="btn btn-primary rounded-circle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" className="btn btn-danger rounded-circle" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className="fa fa-fw fa-plus" style={{ fontSize: '1.75em' }} />
             </button>
             <ul className="dropdown-menu modal-menu">

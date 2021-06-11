@@ -37,9 +37,11 @@ export const getTasks = () => async dispatch => {
         });
         const data = await res.json();
 
+        console.log(data.workflows[1].Ls_Tasks)
+
         dispatch({
             type: GET_TASKS,
-            payload: data.workflows[0].Ls_Tasks
+            payload: data.workflows[1].Ls_Tasks
         });
     } catch (err) {
         dispatch({

@@ -30,7 +30,7 @@ const NavBar = (props) => {
                     <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
                 </div>
                 <div className="logo">
-                    <h4>MoreTask</h4>
+                    <span>{" "}MoreTask</span>
                 </div>
             </nav>
             <div className={navActive ? 'out-nav-links active' : 'out-nav-links'}
