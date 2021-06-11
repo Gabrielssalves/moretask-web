@@ -1,13 +1,12 @@
 import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { Route } from "react-router-dom";
-
 import { withRouter } from 'react-router-dom';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 const Sidebar = (props) => {
-    // const isAdmin = localStorage.getItem('userAdmin');
+    const isAdmin = localStorage.getItem('userAdmin');
 
     const { location } = props;
     if (location.pathname.match(/login/) || location.pathname.match(/register/)) {
@@ -30,7 +29,7 @@ const Sidebar = (props) => {
                         <SideNav.Nav defaultSelected="">
                             <NavItem eventKey="workflow">
                                 <NavIcon>
-                                    <i className="fa fa-fw fa-table" style={{ fontSize: '1.75em' }} />
+                                <i className="fa fa-fw fa-table" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
                                 <NavText>
                                     Workflow

@@ -39,7 +39,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
                 body={
                     <Fragment>
                         <ToastContainer />
-                        <ul className="collection with-header w-75 p-0 mt-4 me-5 border border-secondary glass-background ">
+                        <ul className="collection with-header w-75 p-0 mt-4 border border-secondary glass-background ">
                             <li className="collection-header">
                                 <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
                                 <span className="h6 mt-2 text-secondary fw-bolder"> Current Task</span>
