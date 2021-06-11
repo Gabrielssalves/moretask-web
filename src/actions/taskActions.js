@@ -37,8 +37,6 @@ export const getTasks = () => async dispatch => {
         });
         const data = await res.json();
 
-        console.log(data.workflows[1].Ls_Tasks)
-
         dispatch({
             type: GET_TASKS,
             payload: data.workflows[1].Ls_Tasks
@@ -46,7 +44,7 @@ export const getTasks = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.statusText
+            // payload: err.response.statusText
         })
     }
 };
@@ -55,25 +53,26 @@ export const getTasks = () => async dispatch => {
 export const addTask = (task) => async dispatch => {
     try {
         setLoading();
-
-        const res = await fetch('/workflow', {
+        const token = localStorage.getItem('userToken');
+        const res = await fetch('https://moretask-fatec.herokuapp.com/task', {
             method: "POST",
             body: JSON.stringify(task),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { 
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token }
         });
-
+        window.location.reload();
         const data = await res.json();
-
+        console.log(data)
         dispatch({
             type: ADD_TASK,
             payload: data
         });
+        
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.statusText
+            // payload: err.response.statusText
         })
     }
 };
@@ -82,19 +81,22 @@ export const addTask = (task) => async dispatch => {
 export const deleteTask = (id) => async dispatch => {
     try {
         setLoading();
+        const token = localStorage.getItem('userToken');
 
-        await fetch(`/workflow/${id}`, {
-            method: "DELETE"
+        await fetch(`https://moretask-fatec.herokuapp.com/task/${id}`, {
+            method: "DELETE",
+            headers: { 'Authorization': 'Bearer ' + token }
         });
 
         dispatch({
             type: DELETE_TASK,
             payload: id
         });
+        window.location.reload();
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.statusText
+            // payload: err.response.statusText
         })
     }
 };
@@ -103,17 +105,17 @@ export const deleteTask = (id) => async dispatch => {
 export const updateTask = task => async dispatch => {
     try {
         setLoading();
-
-        const res = await fetch(`/workflow/${task.id}`, {
-            method: "PATCH", // patch wont destroy dt_create + ob_status + others
+        const token = localStorage.getItem('userToken');
+        const res = await fetch(`https://moretask-fatec.herokuapp.com/task/${task._id}`, {
+            method: "PATCH", 
             body: JSON.stringify(task),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { 
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token }
         });
 
         const data = await res.json();
-
+        console.log(data)
         dispatch({
             type: UPDATE_TASK,
             payload: data
@@ -121,7 +123,7 @@ export const updateTask = task => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.statusText
+            // payload: err.response.statusText
         })
     }
 };
@@ -141,7 +143,7 @@ export const searchTasks = (text) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.statusText
+            // payload: err.response.statusText
         })
     }
 };

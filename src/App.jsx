@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Sidebar from "./components/layout/Sidebar";
 
-import NavBar from './components/layout/NavBar'
+import Navbar from './components/layout/Navbar'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Fragment>
-            <NavBar></NavBar>
+            <Navbar></Navbar>
             <Sidebar />
             <div className="container d-flex justify-content-center">
               <Routes />

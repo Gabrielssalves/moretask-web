@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { getTasks, updateTask } from "../../actions/taskActions";
-import CommentItem from "./CommentItem";
+// import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "../layout/Spinner";
@@ -21,7 +21,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
 
     const onSubmit = () => {
         const updTask = {
-            id: tasks[0].id,
+            id: tasks[0]._id,
             ds_status
         }
         updateTask(updTask);
@@ -39,12 +39,12 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                 body={
                     <Fragment>
                         <ToastContainer />
-                        <ul className="collection with-header w-75 p-0 mt-4 border border-secondary glass-background">
+                        <ul className="collection with-header w-75 p-0 mt-4 me-5 border border-secondary glass-background">
                             <li className="collection-header">
                                 <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
                                 <span className="h6 mt-2 text-secondary"> Current Task</span>
                             </li>
-                            {!loading ? (
+                            {!loading && tasks.length === 0 ? (
                                 <p className="center">
                                     No task to show...
                                 </p>
@@ -52,30 +52,30 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                 <Fragment>
                                     <div>
                                         <li className="collection-item center">
-                                            <h5>{tasks[0].nm_task}</h5>
+                                            <h5>{tasks[0].Nm_Task}</h5>
                                         </li>
 
                                         <li className="collection-item">
                                             <span className="h6 ms-1 text-secondary">Task Description</span>
                                             <br />
                                             <div className="comment-textarea ms-1 mt-1 text-secondary">
-                                                {tasks[0].ds_task}
+                                                {tasks[0].Ds_Task}
                                             </div>
                                         </li>
 
                                         <li className="collection-item ms-2 ">
                                             <span className="text-secondary">
                                                 <span className="text-dark">Created by: </span>
-                                                {tasks[0].ob_owner}
+                                                Gabriel
                                                 <br />
                                                 <span className="text-dark">Created on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].dt_create}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Create}</Moment>
                                                 <br />
                                                 <span className="text-dark">Activity Started on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].dt_start}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Start}</Moment>
                                                 <br />
                                                 <span className="text-dark">Forecast Date: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].dt_start}</Moment>
+                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].Dt_Prediction}</Moment>
                                             </span>
                                         </li>
                                         <li className="collection-item pb-4">
@@ -83,7 +83,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                             <select
                                                 className="form-select mt-1"
                                                 name="ds_status"
-                                                value={tasks[0].ds_status}
+                                                value={tasks[0].Ob_Status.Ds_status}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
                                                 <option defaultValue value="" disabled>Set Assignee</option>
@@ -104,11 +104,11 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                             <span className="h6 ms-1 text-secondary">Comments</span>
                                         </li>
 
-                                        {!loading && tasks[0].ls_comments.length === 0 ? (
+                                        {/* {!loading && tasks[0].Ls_Comments.length === 0 ? (
                                             <p className="center mt-3">No comments to show...</p>
                                         ) : (
-                                            tasks[0].ls_comments.map(ls_comments => <CommentItem ls_comments={ls_comments} key={ls_comments.comment_id} />)
-                                        )}
+                                            tasks[0].Ls_Comments.map(Ls_Comments => <CommentItem Ls_Comments={Ls_Comments} key={Ls_Comments.comment_id} />)
+                                        )} */}
 
                                         <li className="collection-item">
                                             <div className="mx-1 mt-2 ">

@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
+
 
 html {
     overflow: hidden;
@@ -49,6 +53,12 @@ li {
     margin-left: 1%;
 }
 
+.logo {
+    color:white;
+    font-size: 2rem;
+    font-family: 'Lobster Two', cursive;
+}
+
 /* search bar size*/
 .input-customsize {
     width: 30%;
@@ -59,7 +69,6 @@ li {
 #kaban {
     float:left;
     position:relative;
-    margin-top: 1%;
     width: 90%;    
     height:auto;
     padding: 20px;
@@ -87,7 +96,7 @@ li {
 .board {
     float:left;
     position:relative;
-    width:200px;
+    width:220px;
     height:auto;
     margin:8px;
     background-color:lightgray;
@@ -122,6 +131,12 @@ li {
     font-weight: 600;
 }
 
+#board4 header {
+    background-color:#1830ba;
+    color:white;
+    font-weight: 600;
+}
+
 .cards {
     list-style-type:none;
     float:left;
@@ -145,7 +160,7 @@ li {
     float:left;
     width:100%;
     font-weight: 600;
-    padding-bottom: 8px;
+    padding-bottom: 2px;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -226,7 +241,7 @@ li {
 
 .btn-modal-workflow {
     position: absolute;
-    right: 80px;
+    right: 155px;
     bottom: 50px;
     height: 60px;
     width: 60px;
@@ -253,4 +268,8 @@ li {
 .glass-background {
     border-radius: 20px;
     background-color: rgba(0,0,0, 0.3) !important;
+}
+
+.w-95 {
+    width: 95%;
 }

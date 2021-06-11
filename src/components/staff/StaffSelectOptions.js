@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { getStaff } from "../../actions/staffActions"
+import { getStaff } from "../../actions/staffActions";
 
 const StaffSelectOptions = ({ getStaff, staff: { staff, loading } }) => {
     useEffect(() => {
@@ -11,8 +11,8 @@ const StaffSelectOptions = ({ getStaff, staff: { staff, loading } }) => {
 
 
     return (
-        !loading && staff !== null && staff.map(staff => <option key={staff._id} value={`${staff.name}`}>
-            {staff.name}
+        !loading && staff !== null && staff.map(staff => <option key={staff._id} value={`${staff.Nm_User}`}>
+            {staff.Nm_User}
         </option>)
     )
 }

@@ -15,7 +15,7 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
             buttons: [
                 {
                     label: 'Yes',
-                    onClick: () => deleteTask(task.id)
+                    onClick: () => deleteTask(task._id)
                 },
                 {
                     label: 'No',
@@ -27,24 +27,23 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
 
     return (
 
-        <div className="card">
+        <div className="card card-content-text">
             <a
                 href="#edit-task-modal"
-                className="modal-trigger text-decoration-none cardtitle noselect h5 text-primary"
+                className="modal-trigger text-decoration-none cardtitle noselect h6 text-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#edit-task-modal"
                 onClick={() => setCurrent(task)}
             >
                 {task.Nm_Task}
             </a>
-            <span className="text-black">
-                <span className="card-content-text ">Assigned to{' '}</span>
-                <strong>Gabriel</strong>
+            <span>
+                <span className="text-secondary">Assigned to{' '}</span>
+                <strong className="text-black">{task.Ob_User.Nm_User}</strong>
             </span>
-            <span className="text-secondary card-content-text ">
+            <span className="text-secondary ">
                 Created on{' '}
-            <br />
-            <Moment format="MMMM Do YYYY, h:mm">{task.Dt_Create}</Moment>
+            <Moment format="MMMM Do, h:mm">{task.Dt_Create}</Moment>
             </span>
             <div className="d-flex justify-content-end">
                 <a

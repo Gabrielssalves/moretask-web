@@ -2,45 +2,52 @@ import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateTask } from "../../actions/taskActions"
+import { getStaff } from "../../actions/staffActions";
 import StaffSelectOptions from "../staff/StaffSelectOptions"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const EditTaskModal = ({ current, updateTask }) => {
-    const [nm_task, setNm_Task] = useState("");
-    const [ds_task, setDs_Task] = useState("");
-    const [ob_owner, setOb_Owner] = useState("");
-    const [dt_start, setDt_Start] = useState(new Date());
-    const [dt_prediction, setDt_Prediction] = useState(new Date());
-    const [ds_status, setDs_Status] = useState("");
+const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading } }) => {
+    const [name, setNm_Task] = useState("");
+    const [description, setDs_Task] = useState("");
+    const [userName, setUserName] = useState("");
+    const [user, setUser] = useState(""); // user id
+    const [dtStart, setDt_Start] = useState(new Date());
+    const [dtPrediction, setDt_Prediction] = useState(new Date());
+    const [status, setDs_Status] = useState("");
 
     const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
     const taskUpdatedToast = () => toast("Task Updated Successfully!", {autoClose : 2000, toastId: "custom-id-success"});
 
     useEffect(() => {
+        getStaff();        
         if (current) {
-            setNm_Task(current.nm_task);
-            setDs_Task(current.ds_task);
-            setOb_Owner(current.ob_owner);
-            setDt_Start(current.dt_start);
-            setDt_Prediction(current.dt_prediction);
-            setDs_Status(current.ds_status);
+            setNm_Task(current.Nm_Task);
+            setDs_Task(current.Ds_Task);
+            setUserName(current.Ob_User.Nm_User);
+            setDt_Start(current.Dt_Start);
+            setDt_Prediction(current.Dt_Prediction);
+            setDs_Status(current.Ob_Status.Ds_Status);
         }
+        // eslint-disable-next-line
     }, [current]);
 
+    const browseUsers = (userName) => {
+        staff.filter(staff => staff.Nm_User === userName).map(filteredStaff => (setUser(filteredStaff._id)));
+    }
+
     const onSubmit = () => {
-        if (nm_task === "" || ob_owner === "") {
+        if (name === "" || userName === "") {
             validationErrorToast();
         } else {
             const updTask = {
-                id: current.id,
-                nm_task,
-                ds_task,
-                ob_owner,
-                dt_start,
-                dt_prediction,
-                ds_status
+                _id: current._id,
+                name,
+                description,
+                status,
+                dtStart,
+                dtPrediction                
             }
             updateTask(updTask);
             taskUpdatedToast();
@@ -63,31 +70,32 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 className="form-control"
                                 placeholder="Eg: Deploy Last Version.."
                                 type="text"
-                                name="nm_task"
-                                value={nm_task}
+                                name="name"
+                                value={name}
                                 onChange={e => setNm_Task(e.target.value)}
                             />
                         </div>
                         <div className="input-group mb-2">
                             <select
                                 className="form-select"
-                                name="ds_status"
-                                value={ds_status}
+                                name="status"
+                                value={status}
                                 onChange={e => setDs_Status(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Status</option>
-                                <option value="On Hold">On Hold</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Completed">Completed</option>
+                                <option value="Backlog">Backlog</option>
+                                <option value="Aberto">Aberto</option>
+                                <option value="Andamento">Andamento</option>
+                                <option value="Concluido">Concluido</option>
                             </select>
                             <span className="input-group-text" id="basic-addon1">Task Status</span>
                         </div>
                         <div className="input-group mb-2">
                             <select
                                 className="form-select"
-                                name="ob_owner"
-                                value={ob_owner}
-                                onChange={e => setOb_Owner(e.target.value)}
+                                name="userName"
+                                value={userName}
+                                onChange={e => {setUserName(e.target.key); browseUsers(e.target.value)}  }
                             >
                                 <option value="" disabled>Set Assignee</option>
                                 <StaffSelectOptions />
@@ -100,8 +108,8 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 <input
                                     className="form-control"
                                     type="datetime-local"
-                                    id="dt_start"
-                                    value={dt_start}
+                                    id="dtStart"
+                                    value={dtStart}
                                     onChange={e => setDt_Start(e.target.value)}
                                 />
                             </div>
@@ -110,9 +118,9 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 <input
                                     className="form-control"
                                     type="datetime-local"
-                                    id="dt_prediction"
-                                    value={dt_prediction}
-                                    onChange={e => setDt_Prediction(e.target.value)}
+                                    id="dtPrediction"
+                                    value={dtPrediction}
+                                    onChange={e => setDt_Prediction((e.target.value).substr(0, 16))}
                                 />
                             </div>
                         </div>
@@ -122,8 +130,8 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 className="form-control"
                                 placeholder="Type here a detailed description of the task.."
                                 type="text"
-                                name="ds_task"
-                                value={ds_task}
+                                name="description"
+                                value={description}
                                 onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
@@ -150,11 +158,14 @@ const EditTaskModal = ({ current, updateTask }) => {
 
 EditTaskModal.propTypes = {
     current: PropTypes.object,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
+    staff: PropTypes.object.isRequired,
+    getStaff: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    current: state.task.current
+    current: state.task.current,
+    staff: state.staff
 })
 
-export default connect(mapStateToProps, { updateTask })(EditTaskModal)
+export default connect(mapStateToProps, { getStaff, updateTask })(EditTaskModal)

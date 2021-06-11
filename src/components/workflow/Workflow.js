@@ -32,35 +32,46 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                         <div id="scroller">
                             <div id="boards">
                                 <div className="board" id="board1">
-                                    <header className="text-center">On hold</header>
+                                    <header className="text-center">Backlog</header>
                                     <div className="cards" id="b1">
                                         {!loading && tasks.length === 0 ? (
                                             <p className="center">No task to show...</p>
                                         ) : (
-                                            tasks.map(task => <TaskItem task={task} key={task._id} />)
+                                            tasks.filter(task => task.Ds_Status_Task === "Backlog").map(task => <TaskItem task={task} key={task._id} />)
                                         )}
 
                                     </div>
                                 </div>
 
                                 <div className="board" id="board2">
-                                    <header className="text-center">In Progress</header>
+                                    <header className="text-center">Aberto</header>
                                     <div className="cards" id="b2">
-                                        {!loading ? (
+                                        {!loading && tasks.length === 0 ? (
                                             <p className="center">No task to show...</p>
                                         ) : (
-                                            tasks.filter(task => task.ds_status === "In Progress").map(task => <TaskItem task={task} key={task.id} />)
+                                            tasks.filter(task => task.Ds_Status_Task === "Aberto").map(task => <TaskItem task={task} key={task._id} />)
                                         )}
                                     </div>
                                 </div>
 
                                 <div className="board" id="board3">
-                                    <header className="text-center">Completed</header>
+                                    <header className="text-center">Andamento</header>
                                     <div className="cards" id="b3">
-                                        {!loading ? (
+                                        {!loading && tasks.length === 0 ? (
                                             <p className="center">No task to show...</p>
                                         ) : (
-                                            tasks.filter(task => task.ds_status === "Completed").map(task => <TaskItem task={task} key={task.id} />)
+                                            tasks.filter(task => task.Ds_Status_Task === "Andamento").map(task => <TaskItem task={task} key={task._id} />)
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="board" id="board4">
+                                    <header className="text-center">Concluído</header>
+                                    <div className="cards" id="b4">
+                                        {!loading && tasks.length === 0 ? (
+                                            <p className="center">No task to show...</p>
+                                        ) : (
+                                            tasks.filter(task => task.Ds_Status_Task === "Concluido").map(task => <TaskItem task={task} key={task._id} />)
                                         )}
                                     </div>
                                 </div>

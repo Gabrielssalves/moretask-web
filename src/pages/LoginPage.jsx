@@ -46,7 +46,7 @@ class LoginPage extends React.Component {
         const data = await result.json();
         if (result.status === 200) {
             localStorage.setItem('userToken', data.token);            
-            this.props.history.push('/')
+            this.props.history.push('/task')
         }
         else            
             console.log(data.message);    
@@ -85,6 +85,9 @@ class LoginPage extends React.Component {
                     <p>Mantenha-se logado</p>
                 </div>
                 <button onClick={this.postUserLogin}>Logar</button>
+                <div className="register-btn">
+                    <a href="/register">Registrar-se</a>
+                </div>
             </div>}>
             </Page>
         )

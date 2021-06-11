@@ -1,43 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addTask } from "../../actions/taskActions"
+import { addTask } from "../../actions/taskActions";
+import { getStaff } from "../../actions/staffActions";
 import StaffSelectOptions from "../staff/StaffSelectOptions"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddTaskModal = ({ addTask }) => {
-    const [nm_task, setNm_Task] = useState("");
-    const [ds_task, setDs_Task] = useState("");
-    const [ob_owner, setOb_Owner] = useState("");
-    const [dt_start, setDt_Start] = useState(new Date());
-    const [dt_prediction, setDt_Prediction] = useState(new Date());
+const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
+    const [name, setNm_Task] = useState("");
+    const [description, setDs_Task] = useState("");
+    const [userName, setUserName] = useState("");
+    const [user, setUser] = useState(""); //user id
+    const [dtStart, setDt_Start] = useState(new Date());
+    const [dtPrediction, setDt_Prediction] = useState(new Date());
+    const idWorkflow = "60c2ce63e514c20004ce378f";
+    const status = "Backlog"
+    
 
     const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
 
-    const taskAddedToast = () => toast("Task Created Successfully!", {autoClose : 2000, toastId: "custom-id-success"});
+    // const taskAddedToast = () => toast("Task Created Successfully!", {autoClose : 2000, toastId: "custom-id-success"}); // não invocavel mais
+
+    useEffect(() => {
+        getStaff();
+        // eslint-disable-next-line
+    }, []);
+
+    const browseUsers = (userName) => {
+        staff.filter(staff => staff.Nm_User === userName).map(filteredStaff => (setUser(filteredStaff._id)));
+    }
 
     const onSubmit = () => {
-        if (nm_task === "" || ob_owner === "") {
+        if (name === "" || userName === "") {
             validationErrorToast();
         } else {
+
             const newTask = {
-                nm_task,
-                ds_task,
-                ls_comments: [],
-                ob_owner,
-                dt_create: new Date(),
-                dt_start,
-                dt_prediction,
-                ds_status: "On Hold"
+                name,
+                description,
+                user,
+                status,
+                idWorkflow,
+                dtStart,
+                dtPrediction
             }
             addTask(newTask);
-            taskAddedToast();
 
+            console.log(dtStart)
+            
             //clear fields
             setNm_Task("");
             setDs_Task("");
-            setOb_Owner("");
+            setUserName("");
             setDt_Start(new Date());
             setDt_Prediction(new Date());
         }
@@ -59,8 +74,8 @@ const AddTaskModal = ({ addTask }) => {
                                 className="form-control"
                                 placeholder="Eg: Deploy Last Version.."
                                 type="text"
-                                name="nm_task"
-                                value={nm_task}
+                                name="name"
+                                value={name} //Nm_Task
                                 onChange={e => setNm_Task(e.target.value)}
                             />
                         </div>
@@ -68,9 +83,9 @@ const AddTaskModal = ({ addTask }) => {
 
                             <select
                                 className="form-select"
-                                name="ob_owner"
-                                value={ob_owner}
-                                onChange={e => setOb_Owner(e.target.value)}
+                                name="userName"
+                                value={userName} //ob_owner
+                                onChange={e => {setUserName(e.target.key); browseUsers(e.target.value)}  }
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
                                 <StaffSelectOptions />
@@ -83,8 +98,8 @@ const AddTaskModal = ({ addTask }) => {
                                 <input
                                     className="form-control"
                                     type="datetime-local"
-                                    id="dt_start"
-                                    value={dt_start}
+                                    id="dtStart"
+                                    value={dtStart} //Dt_Start
                                     onChange={e => setDt_Start(e.target.value)}
                                 />
                             </div>
@@ -93,8 +108,8 @@ const AddTaskModal = ({ addTask }) => {
                                 <input
                                     className="form-control"
                                     type="datetime-local"
-                                    id="dt_prediction"
-                                    value={dt_prediction}
+                                    id="dtPrediction"
+                                    value={dtPrediction} // Dt_Prediction
                                     onChange={e => setDt_Prediction(e.target.value)}
                                 />
                             </div>
@@ -105,8 +120,8 @@ const AddTaskModal = ({ addTask }) => {
                                 className="form-control"
                                 placeholder="Type here a detailed description of the task.."
                                 type="text"
-                                name="ds_task"
-                                value={ds_task}
+                                name="description"
+                                value={description} //ds_task
                                 onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
@@ -134,6 +149,12 @@ const AddTaskModal = ({ addTask }) => {
 
 AddTaskModal.propTypes = {
     addTask: PropTypes.func.isRequired,
+    staff: PropTypes.object.isRequired,
+    getStaff: PropTypes.func.isRequired
 }
 
-export default connect(null, { addTask })(AddTaskModal);
+const mapStateToProps = state => ({
+    staff: state.staff
+});
+
+export default connect(mapStateToProps, { getStaff, addTask })(AddTaskModal);
