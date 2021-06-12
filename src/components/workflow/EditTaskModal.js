@@ -35,8 +35,6 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
 
     const browseUsers = (userName) => {
         staff.filter(staff => staff.Nm_User === userName).map(filteredStaff => (setUser(filteredStaff._id)));
-        console.log(userName);
-        console.log(user);
     }
 
     const onSubmit = () => {
@@ -52,8 +50,6 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                 dtStart,
                 dtPrediction
             }
-            console.log(userName)
-            console.log(user)
             updateTask(updTask);
             taskUpdatedToast();
         }

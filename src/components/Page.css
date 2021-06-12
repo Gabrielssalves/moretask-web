@@ -19,7 +19,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     font-weight: 400;
-    max-height: 90%;
     overflow: auto;
 }
 

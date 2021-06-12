@@ -35,7 +35,6 @@ export const getTasks = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        
         dispatch({
             type: GET_TASKS,
             payload: data.workflows[0].Ls_Tasks
@@ -61,7 +60,6 @@ export const getMainTask = () => async dispatch => {
         });
         const data = await res.json();
         const newTask = await data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0]
-        console.log(newTask)
         dispatch({
             type: GET_TASKS,
             payload: newTask
@@ -80,6 +78,34 @@ export const addTask = (task) => async dispatch => {
         setLoading();
         const token = localStorage.getItem('userToken');
         const res = await fetch('https://moretask-fatec.herokuapp.com/task', {
+            method: "POST",
+            body: JSON.stringify(task),
+            headers: { 
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token }
+        });
+        window.location.reload();
+        const data = await res.json();
+        dispatch({
+            type: ADD_TASK,
+            payload: data
+        });
+        
+    } catch (err) {
+        dispatch({
+            type: TASKS_ERROR,
+            // payload: err.response.statusText
+        })
+    }
+};
+
+// add comment to server
+export const addComment = (task) => async dispatch => {
+    try {
+        setLoading();
+        console.log(task)
+        const token = localStorage.getItem('userToken');
+        const res = await fetch(`https://moretask-fatec.herokuapp.com/task/${task._id}/comment`, {
             method: "POST",
             body: JSON.stringify(task),
             headers: { 
@@ -140,7 +166,6 @@ export const updateTask = task => async dispatch => {
         });
 
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: UPDATE_TASK,
             payload: data
