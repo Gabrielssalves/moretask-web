@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from "./components/layout/Home";
-import LoginPage from './pages/LoginPage';
-import UserPage from './pages/UserPage';
+import LoginPage from './components/pages/LoginPage';
+import UserPage from './components/pages/UserPage';
 import Workflow from "./components/workflow/Workflow";
 import TaskScreen from "./components/workflow/TaskScreen";
 import NotFound from "./components/layout/NotFound";

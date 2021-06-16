@@ -11,3 +11,4 @@ export const SET_LOADING_MAIN = 'SET_LOADING_MAIN';
 export const TASKS_ERROR = 'TASKS_ERROR';
 export const GET_STAFF = 'GET_STAFF';
 export const STAFF_ERROR = 'STAFF_ERROR';
+export const SEARCH_TASKS = 'SEARCH_TASKS';

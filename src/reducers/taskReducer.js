@@ -8,7 +8,8 @@ import {
     DELETE_TASK,
     UPDATE_TASK,
     SET_CURRENT,
-    CLEAR_CURRENT
+    CLEAR_CURRENT,
+    SEARCH_TASKS
 } from "../actions/types";
 
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
     mainTask: null,
     current: null,
     loading: true,
-    mainLoading : true,
+    mainLoading: true,
     error: null
 }
 
@@ -52,6 +53,11 @@ const taskReducer = (state = initialState, action) => {
                 tasks: state.tasks.map(task => task._id === action.payload._id ? action.payload : task),
                 loading: false
             };
+        case SEARCH_TASKS:
+            return {
+                ...state,
+                tasks: action.payload
+            }
         case SET_CURRENT:
             return {
                 ...state,

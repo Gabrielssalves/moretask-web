@@ -29,13 +29,9 @@ html {
     background: linear-gradient(135deg,  #EA5C54  0%,#bb6dec 100%); /* W3C */
   }
   
-  .page {
-    width: 90vw;
-    height: 100vh;
-    color: #000;
-    font-family: 'Raleway', sans-serif;
-  }
+  
 
+/* navbar */
 
 li {
     list-style-type: none;
@@ -173,6 +169,7 @@ li {
     font-size: 0.8rem;
 }
 
+/* collection layout */
 
 .collection {
     background-color: #fff;
@@ -229,9 +226,10 @@ li {
 
 .collection-end {
     background-color: white;
-    height: 150px;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
+
+/* general */
 
 .center {
     text-align: center;

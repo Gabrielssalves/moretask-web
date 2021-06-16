@@ -8,22 +8,9 @@ import {
     DELETE_TASK,
     UPDATE_TASK,
     SET_CURRENT,
-    CLEAR_CURRENT
+    CLEAR_CURRENT,
+    SEARCH_TASKS
 } from "./types";
-
-// export const getTasks = () => {
-//     return async (dispatch) => {
-//         setLoading();
-
-//         const res = await fetch('/workflow');
-//         const data = await res.json();
-
-//         dispatch({
-//             type: GET_TASKS,
-//             payload: data
-//         });
-//     };
-// };
 
 // get tasks from server
 export const getTasks = () => async dispatch => {
@@ -49,7 +36,6 @@ export const getTasks = () => async dispatch => {
     }
 };
 
-
 // get tasks from server
 export const getMainTask = () => async dispatch => {
     try {
@@ -70,7 +56,7 @@ export const getMainTask = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -98,7 +84,7 @@ export const addTask = (task) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -126,7 +112,7 @@ export const addComment = (task) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -149,7 +135,7 @@ export const deleteTask = (id) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -178,7 +164,32 @@ export const updateTask = task => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
+        })
+    }
+};
+
+// search tasks from server
+export const searchTasks = (text) => async dispatch => {
+    try {
+        setLoading();
+        const token = localStorage.getItem('userToken');
+
+        const res = await fetch(`https://moretask-fatec.herokuapp.com/workflow?q=${text}`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        }
+        );
+        const data = await res.json();
+        console.log(data)
+        dispatch({
+            type: SEARCH_TASKS,
+            payload: data.workflows[0].Ls_Tasks
+        });
+    } catch (err) {
+        dispatch({
+            type: TASKS_ERROR,
+            payload: err.message
         })
     }
 };
