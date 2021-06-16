@@ -15,7 +15,7 @@ const CommentItem = ({ Ls_Comments }) => {
 }
 
 CommentItem.propTypes = {
-    ls_comments: PropTypes.object.isRequired
+    Ls_Comments: PropTypes.object.isRequired
 }
 
 export default CommentItem

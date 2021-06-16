@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "../layout/Spinner";
 import Page from '../Page';
 
-const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComment }) => {
+const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, addComment }) => {
     const [status, setDs_Status] = useState("");
     const [dsComment, setDs_Comment] = useState("");
-
+    
     const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {status}</span>, { toastId: "custom-id-success" })
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
 
     const onSubmit = () => {
         const updTask = {
-            _id: tasks._id,
+            _id: mainTask._id,
             status,
         }
         updateTask(updTask);
@@ -31,16 +31,13 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
 
     const CreateComment = () => {
         const addCmt = {
-            _id: tasks._id,
+            _id: mainTask._id,
             dsComment
         }
         addComment(addCmt);
     }
 
-    //hardcoded to task[0]
-    //no method to add commentary
-    //comment_id should also be created for each new comment, to be used as key on props
-    if (loading || tasks === null) {
+    if (mainLoading === true || mainTask === null) {
         return <Spinner />
     } else {
         return (
@@ -55,7 +52,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
                                         <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
                                         <span className="h6 mt-2 text-secondary fw-bolder"> Current Task</span>
                                     </li>
-                                    {!loading && tasks.length === 0 ? (
+                                    {mainLoading ? (
                                         <p className="center fw-bolder">
                                             No task to show...
                                         </p>
@@ -63,14 +60,14 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
                                         <Fragment>
                                             <div>
                                                 <li className="collection-item center text-primary fw-bolder">
-                                                    <h5 className="fw-bolder">{tasks.Nm_Task}</h5>
+                                                    <h5 className="fw-bolder">{mainTask.Nm_Task}</h5>
                                                 </li>
 
                                                 <li className="collection-item">
                                                     <span className="h6 ms-1 text-secondary fw-bolder">Task Description</span>
                                                     <br />
                                                     <div className="comment-textarea ms-1 mt-1 text-secondary">
-                                                        {tasks.Ds_Task}
+                                                        {mainTask.Ds_Task}
                                                     </div>
                                                 </li>
 
@@ -80,13 +77,13 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
                                                         Gabriel
                                                         <br />
                                                         <span className="text-dark">Created on: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Create}</Moment>
+                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Create}</Moment>
                                                         <br />
                                                         <span className="text-dark">Activity Started on: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Start}</Moment>
+                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Start}</Moment>
                                                         <br />
                                                         <span className="text-dark">Forecast Date: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Prediction}</Moment>
+                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Prediction}</Moment>
                                                     </span>
                                                 </li>
                                                 <li className="collection-item pb-4">
@@ -94,7 +91,7 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
                                                     <select
                                                         className="form-select mt-1"
                                                         name="status"
-                                                        value={tasks.Ds_Status_Task}
+                                                        value={mainTask.Ds_Status_Task}
                                                         onChange={e => setDs_Status(e.target.value)}
                                                     >
                                                         <option defaultValue value="" disabled>Set Assignee</option>
@@ -116,16 +113,14 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask, addComm
                                                     <span className="h6 ms-1 text-secondary">Comments</span>
                                                 </li>
 
-                                                {!loading ? (
+                                                { mainLoading ? (
                                                     <li className="collection-item">
                                                         <p className="center mt-3">
                                                             No comments to show...
                                                         </p>
                                                     </li>
-
-
                                                 ) : (
-                                                    tasks.Ls_Comments.map(Ls_Comments => <CommentItem Ls_Comments={Ls_Comments} key={Ls_Comments.comment_id} />)
+                                                    mainTask.Ls_Comments.map(Ls_Comments => <CommentItem Ls_Comments={Ls_Comments} key={Ls_Comments._id} />)
                                                 )}
 
                                                 <li className="collection-item">
