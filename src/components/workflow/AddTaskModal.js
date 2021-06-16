@@ -55,11 +55,11 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
             taskAddedToast();
 
             //clear fields
-            // setNm_Task("");
-            // setDs_Task("");
-            // setUserName("");
-            // setDt_Start(new Date());
-            // setDt_Prediction(new Date());
+            setNm_Task("");
+            setDs_Task("");
+            setUserName("");
+            setDt_Start(new Date());
+            setDt_Prediction(new Date());
         }
     }
 

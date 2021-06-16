@@ -50,6 +50,17 @@ const Sidebar = (props) => {
                                     Tarefa
                                 </NavText>
                             </NavItem>
+                            <NavItem eventKey="help">
+                                <NavIcon>
+                                    <i
+                                        className="fa fa-fw fa-question-circle"
+                                        style={{ fontSize: '1.75em' }}
+                                    />
+                                </NavIcon>
+                                <NavText>
+                                    Ajuda
+                                </NavText>
+                            </NavItem>
                             <NavItem eventKey="signout">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-sign-out" style={{ fontSize: '1.75em' }} />

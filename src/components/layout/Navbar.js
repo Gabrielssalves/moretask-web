@@ -1,18 +1,17 @@
 import React from 'react';
+import UsernameDisplay from './UsernameDisplay';
 import { withRouter } from "react-router-dom";
 
 const Navbar = (props) => {
-    const userName = localStorage.getItem("userName");
+    const token = localStorage.getItem('userToken');
 
     return (
         <div className="row w-95">
             <nav className="navbar">
                 <div className="container-fluid justify-content-end">
-                    <i>
-                        {(userName !== "" && <span className="text-light me-5 h5">Bem-vindo, {userName}!</span>)}
-                    </i>
+                    {token && <UsernameDisplay />}
                     <div className="logo">
-                        <a href="/login">MoreTask</a>
+                        <a href="/">MoreTask</a>
                     </div>
                 </div>
             </nav>
