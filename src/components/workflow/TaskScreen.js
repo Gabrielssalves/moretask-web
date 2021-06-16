@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
+import 'moment/locale/pt-br';
 import { getMainTask, updateTask, addComment } from "../../actions/taskActions";
 import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,7 +14,8 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
     const [status, setDs_Status] = useState("");
     const [dsComment, setDs_Comment] = useState("");
     
-    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {status}</span>, { toastId: "custom-id-success" })
+    const taskUpdatedStatusToast = () => toast(<span>Tarefa atualizada para o status "{status}"</span>, { autoClose: 2000, toastId: "custom-id-success" })
+    const commentAddedToast = () => toast("Comentário Adicionado Com Sucesso!", { autoClose: 2000, toastId: "comment-custom-id"})
 
     useEffect(() => {
         getMainTask();
@@ -35,6 +37,7 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
             dsComment
         }
         addComment(addCmt);
+        commentAddedToast();
     }
 
     if (mainLoading === true || mainTask === null) {
@@ -50,11 +53,11 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                 <ul className="collection with-header w-75 p-0 border border-secondary glass-background ">
                                     <li className="collection-header">
                                         <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
-                                        <span className="h6 mt-2 text-secondary fw-bolder"> Current Task</span>
+                                        <span className="h6 mt-2 text-secondary fw-bolder"> Tarefa Atual</span>
                                     </li>
-                                    {mainLoading ? (
-                                        <p className="center fw-bolder">
-                                            No task to show...
+                                    {!mainLoading && !mainTask ? (
+                                        <p className="collection-item center fw-bolder">
+                                            Você está atualizado!!
                                         </p>
                                     ) : (
                                         <Fragment>
@@ -64,7 +67,7 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                                 </li>
 
                                                 <li className="collection-item">
-                                                    <span className="h6 ms-1 text-secondary fw-bolder">Task Description</span>
+                                                    <span className="h6 ms-1 text-secondary fw-bolder">Descrição da Tarefa</span>
                                                     <br />
                                                     <div className="comment-textarea ms-1 mt-1 text-secondary">
                                                         {mainTask.Ds_Task}
@@ -73,28 +76,25 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
 
                                                 <li className="collection-item ">
                                                     <span className="text-secondary fw-bolder">
-                                                        <span className="text-dark">Created by: </span>
-                                                        Gabriel
+                                                        <span className="text-dark">Criado em: </span>
+                                                        <Moment format="D MMMM, h:mm">{mainTask.Dt_Create}</Moment>
                                                         <br />
-                                                        <span className="text-dark">Created on: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Create}</Moment>
+                                                        <span className="text-dark">Início da Tarefa: </span>
+                                                        <Moment format="D MMMM, h:mm">{mainTask.Dt_Start}</Moment>
                                                         <br />
-                                                        <span className="text-dark">Activity Started on: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Start}</Moment>
-                                                        <br />
-                                                        <span className="text-dark">Forecast Date: </span>
-                                                        <Moment format="MMMM Do YYYY, h:mm A">{mainTask.Dt_Prediction}</Moment>
+                                                        <span className="text-dark">Previsão de Término: </span>
+                                                        <Moment format="D MMMM, h:mm">{mainTask.Dt_Prediction}</Moment>
                                                     </span>
                                                 </li>
                                                 <li className="collection-item pb-4">
-                                                    <span className="h6 ms-1 text-secondary fw-bolder">Task Status</span>
+                                                    <span className="h6 ms-1 text-secondary fw-bolder">Status da Tarefa</span>
                                                     <select
                                                         className="form-select mt-1"
                                                         name="status"
                                                         value={mainTask.Ds_Status_Task}
                                                         onChange={e => setDs_Status(e.target.value)}
                                                     >
-                                                        <option defaultValue value="" disabled>Set Assignee</option>
+                                                        <option defaultValue value="" disabled>Mudar Status</option>
                                                         <option value="Backlog">Backlog</option>
                                                         <option value="Aberto">Aberto</option>
                                                         <option value="Andamento">Andamento</option>
@@ -105,18 +105,18 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                                         className="btn btn-primary float-end me-1 my-2 fw-bolder"
                                                         onClick={onSubmit}
                                                     >
-                                                        Update Status
+                                                        Atualizar Status
                                                     </button>
                                                     <br />
                                                 </li>
                                                 <li className="collection-item">
-                                                    <span className="h6 ms-1 text-secondary">Comments</span>
+                                                    <span className="h6 ms-1 text-secondary fw-bold">Comentários</span>
                                                 </li>
 
                                                 { mainLoading ? (
                                                     <li className="collection-item">
                                                         <p className="center mt-3">
-                                                            No comments to show...
+                                                            Sem comentários para mostrar...
                                                         </p>
                                                     </li>
                                                 ) : (
@@ -127,7 +127,7 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                                     <div className="mx-1 mt-2 ">
                                                         <textarea
                                                             className="form-control"
-                                                            placeholder="Add new comment..."
+                                                            placeholder="Adicionar novo comentário..."
                                                             type="text"
                                                             name="dsComment"
                                                             value={dsComment}
@@ -137,9 +137,9 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                                     </div>
                                                     <button
                                                         type="button"
-                                                        className="btn btn-primary float-end me-2 my-2"
+                                                        className="btn btn-primary float-end me-2 my-2 fw-bolder"
                                                         onClick={CreateComment}
-                                                    >Send</button>
+                                                    >Enviar</button>
                                                 </li>
                                                 <li className="collection-end">
                                                 </li>

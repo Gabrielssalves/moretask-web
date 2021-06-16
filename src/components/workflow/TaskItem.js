@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from "react-moment";
+import 'moment/locale/pt-br';
 import { connect } from "react-redux";
 import { deleteTask, setCurrent } from "../../actions/taskActions"
 import { confirmAlert } from 'react-confirm-alert';
@@ -10,15 +11,15 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
 
     const onDelete = () => {
         confirmAlert({
-            title: 'Confirm deletion',
-            message: 'Do you really intend to delete this task?',
+            title: 'Confirmação de Deletar Tarefa',
+            message: 'Você deseja realmente deletar esta tarefa?',
             buttons: [
                 {
-                    label: 'Yes',
+                    label: 'Sim',
                     onClick: () => deleteTask(task._id)
                 },
                 {
-                    label: 'No',
+                    label: 'Não',
                     onClick: () => console.log("action cancelled")
                 }
             ]
@@ -38,12 +39,12 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                 {task.Nm_Task}
             </a>
             <span>
-                <span className="text-secondary">Assigned to{' '}</span>
+                <span className="text-secondary">Responsável{' '}</span>
                 <strong className="text-black">{task.Ob_User.Nm_User}</strong>
             </span>
             <span className="text-secondary ">
-                Created on{' '}
-            <Moment format="MMMM Do, h:mm">{task.Dt_Create}</Moment>
+                Criado em{' '}
+            <Moment format="D MMMM, h:mm">{task.Dt_Create}</Moment>
             </span>
             <div className="d-flex justify-content-end">
                 <a

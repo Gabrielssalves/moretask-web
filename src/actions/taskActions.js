@@ -37,7 +37,6 @@ export const getTasks = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: GET_TASKS,
             payload: data.workflows[0].Ls_Tasks
@@ -45,7 +44,7 @@ export const getTasks = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err
+            payload: err.message
         })
     }
 };
@@ -63,7 +62,6 @@ export const getMainTask = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        console.log(data)
         const newTask = await data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0];
         dispatch({
             type: GET_MAIN_TASK,
@@ -90,7 +88,7 @@ export const addTask = (task) => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        window.location.reload();
+        setTimeout(() => {window.location.reload()}, 1500);
         const data = await res.json();
         dispatch({
             type: ADD_TASK,
@@ -109,7 +107,6 @@ export const addTask = (task) => async dispatch => {
 export const addComment = (task) => async dispatch => {
     try {
         setLoading();
-        console.log(task)
         const token = localStorage.getItem('userToken');
         const res = await fetch(`https://moretask-fatec.herokuapp.com/task/${task._id}/comment`, {
             method: "POST",
@@ -119,9 +116,8 @@ export const addComment = (task) => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        // window.location.reload();
+        setTimeout(() => {window.location.reload()}, 1500);
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: ADD_TASK,
             payload: data
@@ -171,13 +167,14 @@ export const updateTask = task => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-
+        
+        setTimeout(() => {window.location.reload()}, 1500);
         const data = await res.json();
         dispatch({
             type: UPDATE_TASK,
             payload: data
         });
-        window.location.reload();
+        
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,

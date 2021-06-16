@@ -16,9 +16,12 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     const [dtStart, setDt_Start] = useState(new Date());
     const [dtPrediction, setDt_Prediction] = useState(new Date());
     const [status, setDs_Status] = useState("");
+    const now = JSON.stringify(new Date()).substring(1, 17);
 
-    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
-    const taskUpdatedToast = () => toast("Task Updated Successfully!", { autoClose: 2000, toastId: "custom-id-success" });
+    const validationErrorToast = () => toast("Preencha todos os campos.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
+    const dateValidationErrorToast = () => toast("Data Inicial Não Pode Ser Após a Previsão!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error" });
+    const pastDateValidationErrorToast = () => toast("Data Inicial ou Previsão não pode ser no passado!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error-2" });
+    const taskUpdatedToast = () => toast("Tarefa criada com sucesso!", { autoClose: 2000, toastId: "custom-id-success" });
 
     useEffect(() => {
         getStaff();
@@ -38,8 +41,12 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     }
 
     const onSubmit = () => {
-        if (name === "" || userName === "") {
+        if (name === "" || userName === "" || dtStart === "" || dtPrediction === "") {
             validationErrorToast();
+        } else if (dtPrediction < dtStart) {
+            dateValidationErrorToast();
+        } else if (dtStart < now || dtPrediction < now) {
+            pastDateValidationErrorToast();
         } else {
             const updTask = {
                 _id: current._id,
@@ -61,12 +68,12 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                 <div className="modal-content">
                     <ToastContainer />
                     <div className="modal-header">
-                        <h5 className="modal-title" id="staticBackdropLabel">Edit Task</h5>
+                        <h5 className="modal-title" id="staticBackdropLabel">Criar Nova Tarefa</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                         <div className="input-group mb-2">
-                            <span className="input-group-text" id="basic-addon1">Task Name</span>
+                            <span className="input-group-text" id="basic-addon1">Nome da Tarefa</span>
                             <input
                                 className="form-control"
                                 placeholder="Eg: Deploy Last Version.."
@@ -83,13 +90,13 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                 value={status}
                                 onChange={e => setDs_Status(e.target.value)}
                             >
-                                <option defaultValue value="" disabled>Set Status</option>
+                                <option defaultValue value="" disabled>Mudar Status</option>
                                 <option value="Backlog">Backlog</option>
                                 <option value="Aberto">Aberto</option>
                                 <option value="Andamento">Andamento</option>
                                 <option value="Concluido">Concluido</option>
                             </select>
-                            <span className="input-group-text" id="basic-addon1">Task Status</span>
+                            <span className="input-group-text" id="basic-addon1">Status da Tarefa</span>
                         </div>
                         <div className="input-group mb-2">
                             <select
@@ -98,14 +105,14 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                 value={userName}
                                 onChange={e => { setUserName(e.target.key); browseUsers(e.target.value) }}
                             >
-                                <option value="" disabled>Set Assignee</option>
+                                <option value="" disabled>Apontar Responsável</option>
                                 <StaffSelectOptions />
                             </select>
-                            <span className="input-group-text" id="basic-addon1">Task Assignee</span>
+                            <span className="input-group-text" id="basic-addon1">Responsável</span>
                         </div>
                         <div className="form-group mb-2">
                             <div className="col-10 mb-2">
-                                <span className="input-group-text" id="basic-addon">Task Starting Date</span>
+                                <span className="input-group-text" id="basic-addon">Início da Tarefa</span>
                                 <input
                                     className="form-control"
                                     type="datetime-local"
@@ -115,7 +122,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                 />
                             </div>
                             <div className="col-10">
-                                <span className="input-group-text" id="basic-addon1">Task Forecast Date</span>
+                                <span className="input-group-text" id="basic-addon1">Previsão Final da Tarefa</span>
                                 <input
                                     className="form-control"
                                     type="datetime-local"
@@ -126,7 +133,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                             </div>
                         </div>
                         <div className="input-group mb-1">
-                            <span className="input-group-text" id="basic-addon1">Description</span>
+                            <span className="input-group-text" id="basic-addon1">Descrição</span>
                             <textarea
                                 className="form-control"
                                 placeholder="Type here a detailed description of the task.."
@@ -142,13 +149,13 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal">
-                            Cancel
+                            Cancelar
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={onSubmit}>
-                            Update
+                            Atualizar
                         </button>
                     </div>
                 </div>

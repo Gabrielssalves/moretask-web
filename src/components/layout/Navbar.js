@@ -9,7 +9,7 @@ const Navbar = (props) => {
             <nav className="navbar">
                 <div className="container-fluid justify-content-end">
                     <i>
-                        {(userName !== "" && <span className="text-light me-5 h5">Welcome, {userName}!</span>)}
+                        {(userName !== "" && <span className="text-light me-5 h5">Bem-vindo, {userName}!</span>)}
                     </i>
                     <div className="logo">
                         <a href="/login">MoreTask</a>

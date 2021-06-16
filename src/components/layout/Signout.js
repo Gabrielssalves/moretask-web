@@ -18,7 +18,7 @@ const Signout = props => {
     return (
         <div className="text-light h1 text-center">
             <div className="ms-5">
-                Logging out...
+                Desconectando...
             </div>
             <div>
                 <Spinner />

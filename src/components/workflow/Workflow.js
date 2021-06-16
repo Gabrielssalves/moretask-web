@@ -33,7 +33,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                     <div className="board" id="board1">
                                         <header className="text-center">Backlog</header>
                                         <div className="cards" id="b1">
-                                            {!loading && tasks.length === 0 ? (
+                                            {!loading && tasks.filter(task => task.Ds_Status_Task === "Backlog").length === 0 ? (
                                                 <p className="center">No task to show...</p>
                                             ) : (
                                                 tasks.filter(task => task.Ds_Status_Task === "Backlog").map(task => <TaskItem task={task} key={task._id} />)
@@ -45,7 +45,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                     <div className="board" id="board2">
                                         <header className="text-center">Aberto</header>
                                         <div className="cards" id="b2">
-                                            {!loading && tasks.length === 0 ? (
+                                            {!loading && tasks.filter(task => task.Ds_Status_Task === "Concluido").length === 0 ? (
                                                 <p className="center">No task to show...</p>
                                             ) : (
                                                 tasks.filter(task => task.Ds_Status_Task === "Aberto").map(task => <TaskItem task={task} key={task._id} />)
@@ -56,7 +56,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                     <div className="board" id="board3">
                                         <header className="text-center">Andamento</header>
                                         <div className="cards" id="b3">
-                                            {!loading && tasks.length === 0 ? (
+                                            {!loading && tasks.filter(task => task.Ds_Status_Task === "Concluido").length === 0 ? (
                                                 <p className="center">No task to show...</p>
                                             ) : (
                                                 tasks.filter(task => task.Ds_Status_Task === "Andamento").map(task => <TaskItem task={task} key={task._id} />)
@@ -67,7 +67,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                     <div className="board" id="board4">
                                         <header className="text-center">Concluído</header>
                                         <div className="cards" id="b4">
-                                            {!loading && tasks.length === 0 ? (
+                                            {!loading && tasks.filter(task => task.Ds_Status_Task === "Concluido").length === 0 ? (
                                                 <p className="center">No task to show...</p>
                                             ) : (
                                                 tasks.filter(task => task.Ds_Status_Task === "Concluido").map(task => <TaskItem task={task} key={task._id} />)
