@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../components/Page'
+import Page from '../layout/Page'
 import './LoginPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faKey } from '@fortawesome/free-solid-svg-icons'
@@ -47,7 +47,13 @@ class LoginPage extends React.Component {
             localStorage.setItem('userToken', data.token);
             localStorage.setItem('userAdmin', data.admin);
             localStorage.setItem("userName", data.name);
-            this.props.history.push('/task')
+
+            if (localStorage.getItem('userAdmin') === "true") {
+                this.props.history.push('/workflow')
+            } else {
+                this.props.history.push('/task')
+            }
+            window.location.reload();
         }
         else
             console.log(data.message);

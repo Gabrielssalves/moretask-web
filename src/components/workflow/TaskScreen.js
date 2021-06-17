@@ -2,17 +2,20 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { getMainTask, updateTask } from "../../actions/taskActions";
-// import CommentItem from "./CommentItem";
+import 'moment/locale/pt-br';
+import { getMainTask, updateTask, addComment } from "../../actions/taskActions";
+import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "../layout/Spinner";
-import Page from '../Page';
+import Page from '../layout/Page';
 
-const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
+const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, addComment }) => {
     const [status, setDs_Status] = useState("");
+    const [dsComment, setDs_Comment] = useState("");
 
-    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {status}</span>, { toastId: "custom-id-success" })
+    const taskUpdatedStatusToast = () => toast(<span>Tarefa atualizada para o status "{status}"</span>, { autoClose: 2000, toastId: "custom-id-success" })
+    const commentAddedToast = () => toast("Comentário Adicionado Com Sucesso!", { autoClose: 2000, toastId: "comment-custom-id" })
 
     useEffect(() => {
         getMainTask();
@@ -21,17 +24,23 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
 
     const onSubmit = () => {
         const updTask = {
-            _id: tasks._id,
+            _id: mainTask._id,
             status,
         }
         updateTask(updTask);
         taskUpdatedStatusToast();
     }
 
-    //hardcoded to task[0]
-    //no method to add commentary
-    //comment_id should also be created for each new comment, to be used as key on props
-    if (loading || tasks === null) {
+    const CreateComment = () => {
+        const addCmt = {
+            _id: mainTask._id,
+            dsComment
+        }
+        addComment(addCmt);
+        commentAddedToast();
+    }
+
+    if (mainLoading === true || mainTask === null) {
         return <Spinner />
     } else {
         return (
@@ -39,54 +48,54 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
                 body={
                     <Fragment>
                         <ToastContainer />
-                        <ul className="collection with-header w-75 p-0 mt-4 me-5 border border-secondary glass-background ">
+                        <ul className="collection with-header w-75 p-0 border border-secondary glass-background ">
                             <li className="collection-header">
                                 <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
-                                <span className="h6 mt-2 text-secondary fw-bolder"> Current Task</span>
+                                <span className="h6 mt-2 text-secondary fw-bolder"> Tarefa Atual</span>
                             </li>
-                            {!loading && tasks.length === 0 ? (
-                                <p className="center fw-bolder">
-                                    No task to show...
+                            {!mainLoading && !mainTask ? (
+                                <p className="collection-item center fw-bolder">
+                                    Você está atualizado!!
                                 </p>
                             ) : (
                                 <Fragment>
                                     <div>
                                         <li className="collection-item center text-primary fw-bolder">
-                                            <h5 className="fw-bolder">{tasks.Nm_Task}</h5>
+                                            <h5 className="fw-bolder">{mainTask.Nm_Task}</h5>
                                         </li>
 
                                         <li className="collection-item">
-                                            <span className="h6 ms-1 text-secondary fw-bolder">Task Description</span>
+                                            <span className="h6 ms-1 text-secondary fw-bolder">Descrição da Tarefa</span>
                                             <br />
                                             <div className="comment-textarea ms-1 mt-1 text-secondary">
-                                                {tasks.Ds_Task}
+                                                {mainTask.Ds_Task}
                                             </div>
                                         </li>
 
                                         <li className="collection-item ">
                                             <span className="text-secondary fw-bolder">
-                                                <span className="text-dark">Created by: </span>
-                                                Gabriel
+                                                <span className="text-warning">Vence <Moment fromNow>{mainTask.Dt_Prediction}</Moment>
+                                                </span>
                                                 <br />
-                                                <span className="text-dark">Created on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Create}</Moment>
+                                                <span className="text-dark">Criado em: </span>
+                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Create}</Moment>
                                                 <br />
-                                                <span className="text-dark">Activity Started on: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Start}</Moment>
+                                                <span className="text-dark">Início da Tarefa: </span>
+                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Start}</Moment>
                                                 <br />
-                                                <span className="text-dark">Forecast Date: </span>
-                                                <Moment format="MMMM Do YYYY, h:mm A">{tasks.Dt_Prediction}</Moment>
+                                                <span className="text-dark">Previsão de Término: </span>
+                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Prediction}</Moment>
                                             </span>
                                         </li>
                                         <li className="collection-item pb-4">
-                                            <span className="h6 ms-1 text-secondary fw-bolder">Task Status</span>
+                                            <span className="h6 ms-1 text-secondary fw-bolder">Status atual da Tarefa - <span className="text-primary">{(mainTask.Ds_Status_Task)}</span></span>
                                             <select
                                                 className="form-select mt-1"
                                                 name="status"
-                                                value={tasks.Ds_Status_Task}
+                                                value={status}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
-                                                <option defaultValue value="" disabled>Set Assignee</option>
+                                                <option defaultValue value="" disabled>Mudar Status</option>
                                                 <option value="Backlog">Backlog</option>
                                                 <option value="Aberto">Aberto</option>
                                                 <option value="Andamento">Andamento</option>
@@ -97,9 +106,43 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
                                                 className="btn btn-primary float-end me-1 my-2 fw-bolder"
                                                 onClick={onSubmit}
                                             >
-                                                Update Status
+                                                Atualizar Status
                                             </button>
                                             <br />
+                                        </li>
+                                        <li className="collection-item">
+                                            <span className="h6 ms-1 text-secondary fw-bold">Comentários</span>
+                                        </li>
+
+                                        {mainLoading ? (
+                                            <li className="collection-item">
+                                                <p className="center mt-3">
+                                                    Sem comentários para mostrar...
+                                                </p>
+                                            </li>
+                                        ) : (
+                                            mainTask.Ls_Comments.map(Ls_Comments => <CommentItem Ls_Comments={Ls_Comments} key={Ls_Comments._id} />)
+                                        )}
+
+                                        <li className="collection-item">
+                                            <div className="mx-1 mt-2 ">
+                                                <textarea
+                                                    className="form-control"
+                                                    placeholder="Adicionar novo comentário..."
+                                                    type="text"
+                                                    name="dsComment"
+                                                    value={dsComment}
+                                                    onChange={e => setDs_Comment(e.target.value)}
+                                                    rows="5"
+                                                />
+                                            </div>
+                                            <button
+                                                type="button"
+                                                className="btn btn-primary float-end mt-3 me-2 my-2 fw-bolder"
+                                                onClick={CreateComment}
+                                            >Enviar</button>
+                                        </li>
+                                        <li className="collection-end">
                                         </li>
                                     </div>
 
@@ -115,7 +158,8 @@ const TaskScreen = ({ getMainTask, task: { tasks, loading }, updateTask }) => {
 
 TaskScreen.propTypes = {
     getMainTask: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -124,5 +168,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getMainTask, updateTask }
+    { getMainTask, updateTask, addComment }
 )(TaskScreen)

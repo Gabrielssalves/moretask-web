@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Spinner from "./Spinner";
 import { Redirect } from "react-router";
 
-const Signout = props => {
+const Signout = () => {
     useEffect(() => {
         logout();
         // eslint-disable-next-line
@@ -18,7 +18,7 @@ const Signout = props => {
     return (
         <div className="text-light h1 text-center">
             <div className="ms-5">
-                Logging out...
+                Desconectando...
             </div>
             <div>
                 <Spinner />

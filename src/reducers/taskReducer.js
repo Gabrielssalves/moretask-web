@@ -1,18 +1,22 @@
 import {
     GET_TASKS,
+    GET_MAIN_TASK,
     SET_LOADING,
+    SET_LOADING_MAIN,
     TASKS_ERROR,
     ADD_TASK,
     DELETE_TASK,
     UPDATE_TASK,
     SET_CURRENT,
-    CLEAR_CURRENT
+    CLEAR_CURRENT,
 } from "../actions/types";
 
 const initialState = {
     tasks: null,
+    mainTask: null,
     current: null,
-    loading: false,
+    loading: true,
+    mainLoading: true,
     error: null
 }
 
@@ -23,6 +27,12 @@ const taskReducer = (state = initialState, action) => {
                 ...state,
                 tasks: action.payload,
                 loading: false
+            };
+        case GET_MAIN_TASK:
+            return {
+                ...state,
+                mainTask: action.payload,
+                mainLoading: false
             };
         case ADD_TASK:
             return {
@@ -39,7 +49,8 @@ const taskReducer = (state = initialState, action) => {
         case UPDATE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.map(task => task._id === action.payload._id ? action.payload : task)
+                tasks: state.tasks.map(task => task._id === action.payload._id ? action.payload : task),
+                loading: false
             };
         case SET_CURRENT:
             return {
@@ -55,6 +66,11 @@ const taskReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            };
+        case SET_LOADING_MAIN:
+            return {
+                ...state,
+                loadingMain: true
             };
         case TASKS_ERROR:
             console.error(action.payload);

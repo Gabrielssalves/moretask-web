@@ -1,6 +1,8 @@
 import {
     GET_TASKS,
+    GET_MAIN_TASK,
     SET_LOADING,
+    SET_LOADING_MAIN,
     TASKS_ERROR,
     ADD_TASK,
     DELETE_TASK,
@@ -8,20 +10,6 @@ import {
     SET_CURRENT,
     CLEAR_CURRENT
 } from "./types";
-
-// export const getTasks = () => {
-//     return async (dispatch) => {
-//         setLoading();
-
-//         const res = await fetch('/workflow');
-//         const data = await res.json();
-
-//         dispatch({
-//             type: GET_TASKS,
-//             payload: data
-//         });
-//     };
-// };
 
 // get tasks from server
 export const getTasks = () => async dispatch => {
@@ -35,7 +23,6 @@ export const getTasks = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-
         dispatch({
             type: GET_TASKS,
             payload: data.workflows[0].Ls_Tasks
@@ -43,7 +30,7 @@ export const getTasks = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -51,7 +38,7 @@ export const getTasks = () => async dispatch => {
 // get tasks from server
 export const getMainTask = () => async dispatch => {
     try {
-        setLoading();
+        setLoadingMain();
         const userName = localStorage.getItem("userName");
         const token = localStorage.getItem('userToken');
 
@@ -60,16 +47,15 @@ export const getMainTask = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        const newTask = data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0]
-        console.log(newTask)
+        const newTask = await data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0];
         dispatch({
-            type: GET_TASKS,
+            type: GET_MAIN_TASK,
             payload: newTask
         });
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -82,22 +68,50 @@ export const addTask = (task) => async dispatch => {
         const res = await fetch('https://moretask-fatec.herokuapp.com/task', {
             method: "POST",
             body: JSON.stringify(task),
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token }
+                'Authorization': 'Bearer ' + token
+            }
         });
-        window.location.reload();
+        setTimeout(() => {window.location.reload()}, 1500);
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: ADD_TASK,
             payload: data
         });
-        
+
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
+        })
+    }
+};
+
+// add comment to server
+export const addComment = (task) => async dispatch => {
+    try {
+        setLoading();
+        const token = localStorage.getItem('userToken');
+        const res = await fetch(`https://moretask-fatec.herokuapp.com/task/${task._id}/comment`, {
+            method: "POST",
+            body: JSON.stringify(task),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        setTimeout(() => {window.location.reload()}, 1500);
+        const data = await res.json();
+        dispatch({
+            type: ADD_TASK,
+            payload: data
+        });
+
+    } catch (err) {
+        dispatch({
+            type: TASKS_ERROR,
+            payload: err.message
         })
     }
 };
@@ -117,11 +131,10 @@ export const deleteTask = (id) => async dispatch => {
             type: DELETE_TASK,
             payload: id
         });
-        window.location.reload();
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -132,24 +145,25 @@ export const updateTask = task => async dispatch => {
         setLoading();
         const token = localStorage.getItem('userToken');
         const res = await fetch(`https://moretask-fatec.herokuapp.com/task/${task._id}`, {
-            method: "PATCH", 
+            method: "PATCH",
             body: JSON.stringify(task),
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token }
+                'Authorization': 'Bearer ' + token
+            }
         });
-
+        
+        setTimeout(() => {window.location.reload()}, 1500);
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: UPDATE_TASK,
             payload: data
         });
-        window.location.reload();
+        
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            // payload: err.response.statusText
+            payload: err.message
         })
     }
 };
@@ -173,5 +187,12 @@ export const clearCurrent = () => {
 export const setLoading = () => {
     return {
         type: SET_LOADING
+    };
+};
+
+// Set Loading MAIN to True
+export const setLoadingMain = () => {
+    return {
+        type: SET_LOADING_MAIN
     };
 };

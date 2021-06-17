@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 const Sidebar = (props) => {
-    const isAdmin = localStorage.getItem('userAdmin');
 
     const { location } = props;
     if (location.pathname.match(/login/) || location.pathname.match(/register/)) {
@@ -27,20 +26,17 @@ const Sidebar = (props) => {
                     >
                         <SideNav.Toggle />
                         <SideNav.Nav defaultSelected="">
-                            {isAdmin === "true" &&
-                                <NavItem eventKey="workflow">
-                                    <NavIcon>
-                                        <i
-                                            className="fa fa-fw fa-table"
-                                            style={{ fontSize: '1.75em' }}
-                                        />
-                                    </NavIcon>
-                                    <NavText>
-                                        <span className="h5">
-                                            Workflow
-                                        </span>
-                                    </NavText>
-                                </NavItem>}
+                            <NavItem eventKey="workflow">
+                                <NavIcon>
+                                    <i
+                                        className="fa fa-fw fa-table"
+                                        style={{ fontSize: '1.75em' }}
+                                    />
+                                </NavIcon>
+                                <NavText>
+                                    Workflow
+                                </NavText>
+                            </NavItem>
                             <NavItem eventKey="task">
                                 <NavIcon>
                                     <i
@@ -49,22 +45,7 @@ const Sidebar = (props) => {
                                     />
                                 </NavIcon>
                                 <NavText>
-                                    <span className="h5">
-                                        Tarefa
-                                    </span>
-                                </NavText>
-                            </NavItem>
-                            <NavItem eventKey="faq">
-                                <NavIcon>
-                                    <i
-                                        className="fa fa-fw fa-question-circle"
-                                        style={{ fontSize: '1.75em' }}
-                                    />
-                                </NavIcon>
-                                <NavText>
-                                    <span className="h5">
-                                        FAQ
-                                    </span>
+                                    Tarefa
                                 </NavText>
                             </NavItem>
                             <NavItem eventKey="signout">
@@ -72,9 +53,7 @@ const Sidebar = (props) => {
                                     <i className="fa fa-fw fa-sign-out" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
                                 <NavText>
-                                    <span className="h5">
-                                        Desconectar
-                                    </span>
+                                    Desconectar
                                 </NavText>
                             </NavItem>
                         </SideNav.Nav>
