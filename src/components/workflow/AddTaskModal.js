@@ -6,6 +6,7 @@ import { getStaff } from "../../actions/staffActions";
 import StaffSelectOptions from "../staff/StaffSelectOptions"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment';
 
 const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
     const [name, setNm_Task] = useState("");
@@ -16,8 +17,7 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
     const [dtPrediction, setDt_Prediction] = useState("");
     const idWorkflow = "60c2ce63e514c20004ce378f";
     const status = "Backlog"
-    const now = JSON.stringify(new Date()).substring(1, 17);
-    const dtCreate = now;    
+    const now = (moment().format().substring(0, 16));
     const validationErrorToast = () => toast("Preencha todos os campos.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
     const dateValidationErrorToast = () => toast("Data Inicial Não Pode Ser Após a Previsão!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error" });
     const pastDateValidationErrorToast = () => toast("Data Inicial ou Previsão não pode ser no passado!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error-2" });
@@ -40,7 +40,7 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
         } else if (dtStart < now || dtPrediction < now) {
             pastDateValidationErrorToast();
         } else {
-
+            const dtCreate = (moment().format().substring(0, 16));  
             const newTask = {
                 name,
                 description,
@@ -51,6 +51,12 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
                 dtStart,
                 dtPrediction
             }
+            console.log(moment().format());
+            console.log(now);
+            console.log(dtStart);
+            console.log(dtPrediction);
+            console.log(newTask);
+
             addTask(newTask);
             taskAddedToast();
 
@@ -115,7 +121,7 @@ const AddTaskModal = ({ addTask, getStaff, staff: { staff, loading } }) => {
                                     type="datetime-local"
                                     id="dtPrediction"
                                     value={dtPrediction} // Dt_Prediction
-                                    onChange={e => setDt_Prediction(e.target.value)}
+                                    onChange={e => setDt_Prediction((e.target.value))}
                                 />
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from "react-moment";
 import 'moment/locale/pt-br';
+import 'moment-timezone';
 import { connect } from "react-redux";
 import { deleteTask, setCurrent } from "../../actions/taskActions"
 import { confirmAlert } from 'react-confirm-alert';
@@ -43,11 +44,11 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                 <strong className="text-black">{task.Ob_User.Nm_User}</strong>
             </span>
             <span className="text-warning">
-                Entrega <Moment fromNow>{task.Dt_Prediction}</Moment>
+                Entrega <Moment add={{hours:3}} fromNow >{task.Dt_Prediction}</Moment>
             </span>
             <span className="text-secondary ">
                 Criado em{' '}
-                <Moment format="D MMMM, h:mm">{task.Dt_Create}</Moment>
+                <Moment add={{hours:3}} format="D MMMM, h:mm">{task.Dt_Create}</Moment>
             </span>
             <div className="d-flex justify-content-end">
                 <a

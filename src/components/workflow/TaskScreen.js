@@ -74,17 +74,17 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
 
                                         <li className="collection-item ">
                                             <span className="text-secondary fw-bolder">
-                                                <span className="text-warning">Entrega <Moment fromNow>{mainTask.Dt_Prediction}</Moment>
+                                                <span className="text-warning">Entrega <Moment add={{hours:3}} fromNow>{mainTask.Dt_Prediction}</Moment>
                                                 </span>
                                                 <br />
                                                 <span className="text-dark">Criado em: </span>
-                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Create}</Moment>
+                                                <Moment add={{hours:3}} format="D MMMM, h:mm">{mainTask.Dt_Create}</Moment>
                                                 <br />
                                                 <span className="text-dark">Início da Tarefa: </span>
-                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Start}</Moment>
+                                                <Moment add={{hours:3}} format="D MMMM, h:mm">{mainTask.Dt_Start}</Moment>
                                                 <br />
                                                 <span className="text-dark">Previsão de Término: </span>
-                                                <Moment format="D MMMM, h:mm">{mainTask.Dt_Prediction}</Moment>
+                                                <Moment add={{hours:3}} format="D MMMM, h:mm">{mainTask.Dt_Prediction}</Moment>
                                             </span>
                                         </li>
                                         <li className="collection-item pb-4">
@@ -95,9 +95,7 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                                 value={status}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
-                                                <option defaultValue value="" disabled>Mudar Status</option>
-                                                <option value="Backlog">Backlog</option>
-                                                <option value="Aberto">Aberto</option>
+                                                <option defaultValue="Aberto">Aberto</option>
                                                 <option value="Andamento">Andamento</option>
                                                 <option value="Concluido">Concluido</option>
                                             </select>

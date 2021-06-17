@@ -48,7 +48,7 @@ export const getMainTask = () => async dispatch => {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        const filteredTasks = await data.workflows[0].Ls_Tasks.filter(task => ((task.Ob_User.Nm_User === userName) && (task.Ds_Status_Task !== "Concluido")));
+        const filteredTasks = await data.workflows[0].Ls_Tasks.filter(task => ((task.Ob_User.Nm_User === userName) && ((task.Ds_Status_Task !== "Concluido") && (task.Ds_Status_Task !== "Backlog"))));
         
         if (filteredTasks.length <= 1) {
             mainTask = filteredTasks[0];
