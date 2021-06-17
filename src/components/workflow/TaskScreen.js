@@ -74,7 +74,7 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
 
                                         <li className="collection-item ">
                                             <span className="text-secondary fw-bolder">
-                                                <span className="text-warning">Vence <Moment fromNow>{mainTask.Dt_Prediction}</Moment>
+                                                <span className="text-warning">Entrega <Moment fromNow>{mainTask.Dt_Prediction}</Moment>
                                                 </span>
                                                 <br />
                                                 <span className="text-dark">Criado em: </span>

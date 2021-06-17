@@ -19,8 +19,8 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     const now = JSON.stringify(new Date()).substring(1, 17);
 
     const validationErrorToast = () => toast("Preencha todos os campos.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
-    const dateValidationErrorToast = () => toast("Data Inicial Não Pode Ser Após a Previsão!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error" });
-    const pastDateValidationErrorToast = () => toast("Data Inicial ou Previsão não pode ser no passado!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error-2" });
+    // const dateValidationErrorToast = () => toast("Data Inicial Não Pode Ser Após a Previsão!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error" });
+    // const pastDateValidationErrorToast = () => toast("Data Inicial ou Previsão não pode ser no passado!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error-2" });
     const taskUpdatedToast = () => toast("Tarefa atualizada com sucesso!", { autoClose: 2000, toastId: "custom-id-success" });
 
     useEffect(() => {
@@ -43,10 +43,10 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     const onSubmit = () => {
         if (name === "" || userName === "" || dtStart === "" || dtPrediction === "") {
             validationErrorToast();
-        } else if (dtPrediction < dtStart) {
-            dateValidationErrorToast();
-        } else if (dtStart < now || dtPrediction < now) {
-            pastDateValidationErrorToast();
+        // } else if (dtPrediction < dtStart) {
+        //     dateValidationErrorToast();
+        // } else if (dtStart < now || dtPrediction < now) {
+        //     pastDateValidationErrorToast();
         } else {
             const updTask = {
                 _id: current._id,

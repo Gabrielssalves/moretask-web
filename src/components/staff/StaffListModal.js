@@ -23,7 +23,7 @@ const StaffListModal = ({ getStaff, staff: { staff, loading } }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <table class="table">
+                            <table className="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const StaffItem = ({ staff }) => {
-    console.log(staff.Fg_Admin)
     return (
         <tr>
             <td>

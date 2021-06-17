@@ -43,7 +43,7 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                 <strong className="text-black">{task.Ob_User.Nm_User}</strong>
             </span>
             <span className="text-warning">
-                Vence <Moment fromNow>{task.Dt_Prediction}</Moment>
+                Entrega <Moment fromNow>{task.Dt_Prediction}</Moment>
             </span>
             <span className="text-secondary ">
                 Criado em{' '}

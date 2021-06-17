@@ -41,16 +41,38 @@ export const getMainTask = () => async dispatch => {
         setLoadingMain();
         const userName = localStorage.getItem("userName");
         const token = localStorage.getItem('userToken');
+        let mainTask = "";
 
         const res = await fetch('https://moretask-fatec.herokuapp.com/workflow', {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await res.json();
-        const newTask = await data.workflows[0].Ls_Tasks.filter(task => task.Ob_User.Nm_User === userName)[0];
+        const filteredTasks = await data.workflows[0].Ls_Tasks.filter(task => ((task.Ob_User.Nm_User === userName) && (task.Ds_Status_Task !== "Concluido")));
+        
+        if (filteredTasks.length <= 1) {
+            mainTask = filteredTasks[0];
+        } else {
+            let filteredDates = [];
+            filteredTasks.map(task => filteredDates.push(new Date(task.Dt_Prediction).getTime()));
+            //inicialização do teste
+            let closestDateInt = filteredDates[0];
+            let filteredDatePos = 0;
+            let cont = 0;
+            filteredDates.forEach(myFunction);
+            function myFunction(dateInt) {                
+                if (dateInt < closestDateInt) {
+                    closestDateInt = dateInt;
+                    filteredDatePos = cont;
+                }
+                cont++;             
+            }
+            mainTask = filteredTasks[filteredDatePos]
+        }
+
         dispatch({
             type: GET_MAIN_TASK,
-            payload: newTask
+            payload: mainTask
         });
     } catch (err) {
         dispatch({
@@ -73,7 +95,7 @@ export const addTask = (task) => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        setTimeout(() => {window.location.reload()}, 1500);
+        // setTimeout(() => { window.location.reload() }, 1500);
         const data = await res.json();
         dispatch({
             type: ADD_TASK,
@@ -101,7 +123,7 @@ export const addComment = (task) => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        setTimeout(() => {window.location.reload()}, 1500);
+        setTimeout(() => { window.location.reload() }, 1500);
         const data = await res.json();
         dispatch({
             type: ADD_TASK,
@@ -152,14 +174,14 @@ export const updateTask = task => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        
-        setTimeout(() => {window.location.reload()}, 1500);
+
+        setTimeout(() => { window.location.reload() }, 1500);
         const data = await res.json();
         dispatch({
             type: UPDATE_TASK,
             payload: data
         });
-        
+
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
