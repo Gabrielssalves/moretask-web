@@ -95,7 +95,7 @@ export const addTask = (task) => async dispatch => {
                 'Authorization': 'Bearer ' + token
             }
         });
-        // setTimeout(() => { window.location.reload() }, 1500);
+        setTimeout(() => { window.location.reload() }, 1500);
         const data = await res.json();
         dispatch({
             type: ADD_TASK,
