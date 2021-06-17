@@ -16,7 +16,7 @@ const Routes = () => {
   return (
 
     <Switch>
-      <Route path="/" exact component={Home} />>
+      <Route path="/" exact component={Home} />
       <Route path="/login" exact component={LoginPage} />
       <Route path="/register" exact component={UserPage} />
       {isAdmin === "true" && <Route path="/workflow" exact component={Workflow} />}

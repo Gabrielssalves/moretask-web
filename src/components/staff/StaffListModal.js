@@ -23,12 +23,20 @@ const StaffListModal = ({ getStaff, staff: { staff, loading } }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <ul className="collection p-0">
-                                {!loading &&
-                                    staff.map(staff => (
-                                        <StaffItem staff={staff} key={staff._id} />
-                                    ))}
-                            </ul>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {!loading &&
+                                        staff.map(staff => (
+                                            <StaffItem staff={staff} key={staff._id} />
+                                        ))}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="modal-footer">
                             <button
@@ -36,7 +44,7 @@ const StaffListModal = ({ getStaff, staff: { staff, loading } }) => {
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal">
                                 Fechar
-                        </button>
+                            </button>
                         </div>
                     </div>
                 </div>
