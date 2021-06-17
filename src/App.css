@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
-
-
 html {
     overflow: hidden;
 }
@@ -12,24 +10,29 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  
-  .app {
+}
+
+.app {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #EA5C54 ; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #EA5C54  0%, #bb6dec 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#EA5C54 ), color-stop(100%,#bb6dec)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* IE10+ */
-    background: linear-gradient(135deg,  #EA5C54  0%,#bb6dec 100%); /* W3C */
-  }
-  
-  
+    background: #EA5C54;
+    /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #EA5C54 0%, #bb6dec 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #EA5C54), color-stop(100%, #bb6dec));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #EA5C54 0%, #bb6dec 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #EA5C54 0%, #bb6dec 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #EA5C54 0%, #bb6dec 100%);
+    /* IE10+ */
+    background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);
+    /* W3C */
+}
 
 /* navbar */
 
@@ -38,7 +41,7 @@ li {
 }
 
 .sidenav---sidenav---_2tBP {
-    background-color: rgba(0,0,0, 0.25) !important;
+    background-color: rgba(0, 0, 0, 0.25) !important;
     backdrop-filter: blur(45px);
     position: fixed !important;
 }
@@ -50,122 +53,123 @@ li {
 }
 
 .logo {
-    color:white;
+    color: white;
     font-size: 2rem;
     font-family: 'Lobster Two', cursive;
 }
 
 /* search bar size*/
+
 .input-customsize {
     width: 30%;
 }
 
 /* workflow card layout */
 
-#kaban {
-    float:left;
-    position:relative;
-    width: 90%;    
-    height:auto;
+#kanban {
+    float: left;
+    position: relative;
+    width: 90%;
+    height: auto;
     padding: 20px;
     border-radius: 20px;
-    background-color: rgba(0,0,0, 0.3) !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
 #scroller {
-    float:left;
-    position:relative;
-    width:100%;
-    max-width:100%;
-    height:auto;
-    overflow:auto;
+    float: left;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    overflow: auto;
 }
 
 #boards {
-    float:left;
-    position:relative;
-    width:auto;
-    height:auto;
-    margin-bottom:30px;
+    float: left;
+    position: relative;
+    width: auto;
+    height: auto;
+    margin-bottom: 30px;
 }
 
 .board {
-    float:left;
-    position:relative;
-    width:220px;
-    height:auto;
-    margin:8px;
-    background-color:lightgray;
-    border-radius:3px;
-    box-shadow:1px 1px 1px rgba(0,0,0,.2);
+    float: left;
+    position: relative;
+    width: 220px;
+    height: auto;
+    margin: 8px;
+    background-color: lightgray;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
 .board header {
-    float:left;
-    width:100%;
-    padding:.5em;
-    background-color:lightgray;
-    text-transform:uppercase;
-    border-radius:3px 3px 0 0;
+    float: left;
+    width: 100%;
+    padding: .5em;
+    background-color: lightgray;
+    text-transform: uppercase;
+    border-radius: 3px 3px 0 0;
 }
 
 #board1 header {
-    background-color:#BC3425;
-    color:white;
+    background-color: #BC3425;
+    color: white;
     font-weight: 600;
 }
 
 #board2 header {
-    background-color:#e6cb22;
-    color:white;
+    background-color: #e6cb22;
+    color: white;
     font-weight: 600;
 }
 
 #board3 header {
-    background-color:#11b82a;
-    color:white;
+    background-color: #11b82a;
+    color: white;
     font-weight: 600;
 }
 
 #board4 header {
-    background-color:#1830ba;
-    color:white;
+    background-color: #1830ba;
+    color: white;
     font-weight: 600;
 }
 
 .cards {
-    list-style-type:none;
-    float:left;
-    width:100%;
-    padding:4px 8px;
+    list-style-type: none;
+    float: left;
+    width: 100%;
+    padding: 4px 8px;
 }
 
 .card {
-    float:left;
-    width:100%;
-    height:auto;
-    background-color:white;
-    padding:10px;
-    margin:4px 0;
-    border-radius:3px;
-    box-shadow:1px 1px 1px rgba(0,0,0,.2);
+    float: left;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    margin: 4px 0;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     font-weight: 600;
 }
 
 .cardtitle {
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
     font-weight: 600;
     padding-bottom: 2px;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .cards .is-moving {
-    background-color:white;
-    color:black
+    background-color: white;
+    color: black
 }
 
-.card-content-text{
+.card-content-text {
     font-size: 0.8rem;
 }
 
@@ -184,7 +188,7 @@ li {
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
     padding: 10px 20px;
-  }
+}
 
 .collection .collection-item {
     background-color: #fff;
@@ -251,7 +255,7 @@ li {
     width: 60px;
 }
 
-.code-text{
+.code-text {
     font-family: 'Courier New', monospace;
     text-align: justify;
     font-size: 0.8rem;
@@ -271,9 +275,97 @@ li {
 
 .glass-background {
     border-radius: 20px;
-    background-color: rgba(0,0,0, 0.3) !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
 .w-95 {
     width: 95%;
+}
+
+/* faq */
+
+.faq-container {
+    margin: 0 auto ;
+}
+
+.faq {
+    background-color: transparent;
+    border-radius: 10px;
+    margin: 0px 0;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.faq.active {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq.active::before, .faq.active::after {
+    color: #2ecc71;
+    font-size: 7rem;
+    position: absolute;
+    opacity: 0.2;
+    top: 20px;
+    left: 20px;
+    z-index: 0;
+}
+
+.faq.active::before {
+    color: #3498db;
+    top: -10px;
+    left: -30px;
+    transform: rotateY(180deg);
+}
+
+.faq-title {
+    margin: 0 35px 0 0;
+}
+
+.faq-text {
+    display: none;
+    margin: 30px 0 0;
+}
+
+.faq.active .faq-text {
+    display: block;
+}
+
+.faq-toggle {
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    height: 30px;
+    width: 30px;
+}
+
+.faq-toggle:focus {
+    outline: 0;
+}
+
+.faq-toggle .fa-times {
+    display: none;
+}
+
+.faq.active .faq-toggle .fa-times {
+    color: #fff;
+    display: block;
+}
+
+.faq.active .faq-toggle .fa-chevron-down {
+    display: none;
+}
+
+.faq.active .faq-toggle {
+    background-color: #9fa4a8;
 }

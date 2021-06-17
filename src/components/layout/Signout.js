@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Spinner from "./Spinner";
 import { Redirect } from "react-router";
 
-const Signout = props => {
+const Signout = () => {
     useEffect(() => {
         logout();
         // eslint-disable-next-line

@@ -42,9 +42,12 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                 <span className="text-secondary">Responsável{' '}</span>
                 <strong className="text-black">{task.Ob_User.Nm_User}</strong>
             </span>
+            <span className="text-warning">
+                Vence <Moment fromNow>{task.Dt_Prediction}</Moment>
+            </span>
             <span className="text-secondary ">
                 Criado em{' '}
-            <Moment format="D MMMM, h:mm">{task.Dt_Create}</Moment>
+                <Moment format="D MMMM, h:mm">{task.Dt_Create}</Moment>
             </span>
             <div className="d-flex justify-content-end">
                 <a

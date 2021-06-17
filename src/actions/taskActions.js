@@ -8,8 +8,7 @@ import {
     DELETE_TASK,
     UPDATE_TASK,
     SET_CURRENT,
-    CLEAR_CURRENT,
-    SEARCH_TASKS
+    CLEAR_CURRENT
 } from "./types";
 
 // get tasks from server
@@ -161,31 +160,6 @@ export const updateTask = task => async dispatch => {
             payload: data
         });
         
-    } catch (err) {
-        dispatch({
-            type: TASKS_ERROR,
-            payload: err.message
-        })
-    }
-};
-
-// search tasks from server
-export const searchTasks = (text) => async dispatch => {
-    try {
-        setLoading();
-        const token = localStorage.getItem('userToken');
-
-        const res = await fetch(`https://moretask-fatec.herokuapp.com/workflow?q=${text}`, {
-            method: 'GET',
-            headers: { 'Authorization': 'Bearer ' + token }
-        }
-        );
-        const data = await res.json();
-        console.log(data)
-        dispatch({
-            type: SEARCH_TASKS,
-            payload: data.workflows[0].Ls_Tasks
-        });
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,

@@ -8,7 +8,7 @@ import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "../layout/Spinner";
-import Page from '../Page';
+import Page from '../layout/Page';
 
 const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, addComment }) => {
     const [status, setDs_Status] = useState("");
@@ -74,6 +74,9 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
 
                                         <li className="collection-item ">
                                             <span className="text-secondary fw-bolder">
+                                                <span className="text-warning">Vence <Moment fromNow>{mainTask.Dt_Prediction}</Moment>
+                                                </span>
+                                                <br />
                                                 <span className="text-dark">Criado em: </span>
                                                 <Moment format="D MMMM, h:mm">{mainTask.Dt_Create}</Moment>
                                                 <br />
@@ -85,11 +88,11 @@ const TaskScreen = ({ getMainTask, task: { mainTask, mainLoading }, updateTask, 
                                             </span>
                                         </li>
                                         <li className="collection-item pb-4">
-                                            <span className="h6 ms-1 text-secondary fw-bolder">Status da Tarefa</span>
+                                            <span className="h6 ms-1 text-secondary fw-bolder">Status atual da Tarefa - <span className="text-primary">{(mainTask.Ds_Status_Task)}</span></span>
                                             <select
                                                 className="form-select mt-1"
                                                 name="status"
-                                                value={mainTask.Ds_Status_Task}
+                                                value={status}
                                                 onChange={e => setDs_Status(e.target.value)}
                                             >
                                                 <option defaultValue value="" disabled>Mudar Status</option>

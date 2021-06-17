@@ -30,7 +30,7 @@
 }
 
 .page::-webkit-scrollbar {
-    background-color: rgba(233, 217, 0, 0.575);
+    background-color: rgba(234, 92, 84, 0.9);
     border-radius: 20px;
     width: 8px;
 }

@@ -6,6 +6,7 @@ import UserPage from './components/pages/UserPage';
 import Workflow from "./components/workflow/Workflow";
 import TaskScreen from "./components/workflow/TaskScreen";
 import NotFound from "./components/layout/NotFound";
+import FAQ from "./components/pages/FAQ"
 import Signout from "./components/layout/Signout";
 
 
@@ -20,6 +21,7 @@ const Routes = () => {
       <Route path="/register" exact component={UserPage} />
       {isAdmin === "true" && <Route path="/workflow" exact component={Workflow} />}
       <Route path="/task" exact component={TaskScreen} />
+      <Route path="/faq" exact component={FAQ} />
       <Route path="/signout" exact component={Signout} />
       <Route path='*' exact={true} component={NotFound} />
     </Switch>

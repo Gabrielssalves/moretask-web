@@ -21,7 +21,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
     const validationErrorToast = () => toast("Preencha todos os campos.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
     const dateValidationErrorToast = () => toast("Data Inicial Não Pode Ser Após a Previsão!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error" });
     const pastDateValidationErrorToast = () => toast("Data Inicial ou Previsão não pode ser no passado!!", { progressClassName: "Toastify__progress-bar--dark", toastId: "date-id-error-2" });
-    const taskUpdatedToast = () => toast("Tarefa criada com sucesso!", { autoClose: 2000, toastId: "custom-id-success" });
+    const taskUpdatedToast = () => toast("Tarefa atualizada com sucesso!", { autoClose: 2000, toastId: "custom-id-success" });
 
     useEffect(() => {
         getStaff();
@@ -54,7 +54,6 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                 user,
                 description,
                 status,
-                dtStart,
                 dtPrediction
             }
             updateTask(updTask);
@@ -68,7 +67,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                 <div className="modal-content">
                     <ToastContainer />
                     <div className="modal-header">
-                        <h5 className="modal-title" id="staticBackdropLabel">Criar Nova Tarefa</h5>
+                        <h5 className="modal-title" id="staticBackdropLabel">Editar Tarefa</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -119,6 +118,7 @@ const EditTaskModal = ({ current, updateTask, getStaff, staff: { staff, loading 
                                     id="dtStart"
                                     value={dtStart}
                                     onChange={e => setDt_Start(e.target.value)}
+                                    disabled
                                 />
                             </div>
                             <div className="col-10">

@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../Page'
+import Page from '../layout/Page'
 import './LoginPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faKey } from '@fortawesome/free-solid-svg-icons'

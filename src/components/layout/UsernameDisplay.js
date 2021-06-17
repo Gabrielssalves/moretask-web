@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UsernameDisplay = props => {
+const UsernameDisplay = () => {
     const userName = localStorage.getItem("userName");
     
     return (

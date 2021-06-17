@@ -36,7 +36,9 @@ const Sidebar = (props) => {
                                         />
                                     </NavIcon>
                                     <NavText>
-                                        Workflow
+                                        <span className="h5">
+                                            Workflow
+                                        </span>
                                     </NavText>
                                 </NavItem>}
                             <NavItem eventKey="task">
@@ -47,10 +49,12 @@ const Sidebar = (props) => {
                                     />
                                 </NavIcon>
                                 <NavText>
-                                    Tarefa
+                                    <span className="h5">
+                                        Tarefa
+                                    </span>
                                 </NavText>
                             </NavItem>
-                            <NavItem eventKey="help">
+                            <NavItem eventKey="faq">
                                 <NavIcon>
                                     <i
                                         className="fa fa-fw fa-question-circle"
@@ -58,7 +62,9 @@ const Sidebar = (props) => {
                                     />
                                 </NavIcon>
                                 <NavText>
-                                    Ajuda
+                                    <span className="h5">
+                                        FAQ
+                                    </span>
                                 </NavText>
                             </NavItem>
                             <NavItem eventKey="signout">
@@ -66,7 +72,9 @@ const Sidebar = (props) => {
                                     <i className="fa fa-fw fa-sign-out" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
                                 <NavText>
-                                    Desconectar
+                                    <span className="h5">
+                                        Desconectar
+                                    </span>
                                 </NavText>
                             </NavItem>
                         </SideNav.Nav>

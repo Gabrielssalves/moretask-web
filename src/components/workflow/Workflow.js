@@ -8,7 +8,7 @@ import AddTaskModal from "./AddTaskModal";
 import EditTaskModal from "./EditTaskModal";
 import StaffListModal from "../staff/StaffListModal";
 import Spinner from "../layout/Spinner";
-import Page from '../Page';
+import Page from '../layout/Page';
 
 
 
@@ -27,7 +27,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
             <Page
                 body={
                     <Fragment>
-                        <div id="kaban">
+                        <div id="kanban">
                             <div id="scroller">
                                 <div id="boards">
                                     <div className="board" id="board1">
@@ -54,7 +54,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
                                     </div>
 
                                     <div className="board" id="board3">
-                                        <header className="text-center">Andamento</header>
+                                        <header className="text-center">Em Andamento</header>
                                         <div className="cards" id="b3">
                                             {!loading && tasks.filter(task => task.Ds_Status_Task === "Andamento").length === 0 ? (
                                                 <p className="center">Sem tarefas para mostrar...</p>
