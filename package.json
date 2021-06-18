@@ -1,6 +1,9 @@
 {
   "name": "moretask-web",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.16.1"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -12,9 +15,11 @@
     "@testing-library/user-event": "^12.8.3",
     "@trendmicro/react-sidenav": "^0.5.0",
     "dotenv": "^10.0.0",
+    "express-favicon": "^2.0.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
     "querystring": "^0.2.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
@@ -33,7 +38,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
